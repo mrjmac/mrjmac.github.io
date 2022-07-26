@@ -1,5 +1,56 @@
-<div id="text"></div>
- 
-<script>
-document.getElementById("text").innerHTML = "Coming soon!";
-</script>
+<!-- Heavy credit to Sameer Saini, most css and a significant amount of code is from him-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2c94be328f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+            <div class="player">
+                <img src ="images/donda.png" alt="cover" class="record" id="balls">
+                <h2 id="title">Song Name</h2>
+                <div class="slidecontainer">
+                    <i class="fas fa-volume-down"></i>
+                    <input type="range" min="0" max="100" value="50" class="slider">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <div class="controls">
+                    <button class="previous" id="previous"><i class="fas fa-step-backward"></i></button>
+                    <button class="play-pause" id="play-pause"><i class="fas fa-play"></i></button>
+                    <button class="next" id="next"><i class="fas fa-step-forward"></i></button>
+                </div>
+            </div>
+            <div class="playlist">
+                <h2>Playlist</h2>
+                <ul class="song-list">
+                    <li data-scr="music/Kanye_West_-_Heaven_and_Hell_Audio_(getmp3.pro).mp3" data-name="Heaven and Hell" data-index="0"><span>Heaven and Hell</span><span>02:25</span></li>
+                    <li data-scr="music/Hands_On_(getmp3.pro).mp3" data-name="Hands On" data-index="1"><span>Hands On</span><span>03:23</span></li>
+                    <li data-scr="music/Jesus_Is_Lord_(getmp3.pro).mp3" data-name="Jesus Is Lord" data-index="2"><span>Jesus Is Lord</span><span>00:49</span></li>
+                    <li data-scr="music/Kanye_West_-_Closed_On_Sunday_LYRI_(getmp3.pro).mp3" data-name="Closed On Sunday" data-index="3"><span>Closed On Sunday</span><span>02:31</span></li>
+                    <li data-scr="music/Kanye_West_-_Follow_God_Official_(getmp3.pro).mp3" data-name="Follow God" data-index="4"><span>Follow God</span><span>01:44</span></li>
+                    <li data-scr="music/Kanye_West_-_Lord_I_Need_You_Audio_(getmp3.pro).mp3" data-name="Lord I Need You" data-index="5"><span>Lord I Need You</span><span>02:42</span></li>
+                    <li data-scr="music/Kanye_West_-_New_Again_Official_Au_(getmp3.pro).mp3" data-name="New Again" data-index="6"><span>New Again</span><span>03:03</span></li>
+                    <li data-scr="music/Kanye_West_-_Off_The_Grid_Audio_(getmp3.pro).mp3" data-name="Off The Grid" data-index="7"><span>Off The Grid</span><span>05:39</span></li>
+                    <li data-scr="music/Kanye_West_-_On_God_Lyrics_(getmp3.pro).mp3" data-name="On God" data-index="8"><span>On God</span><span>02:47</span></li>
+                    <li data-scr="music/Kanye_West_-_Praise_God_Official_A_(getmp3.pro).mp3" data-name="Praise God" data-index="9"><span>Praise God</span><span>03:46</span></li>
+                    <li data-scr="music/Selah_(getmp3.pro).mp3" data-name="Selah" data-index="10"><span>Selah</span><span>02:44</span></li>
+                    <li data-scr="music/Water_(getmp3.pro).mp3" data-name="Water" data-index="11"><span>Water</span><span>02:48</span></li>
+                    <li data-scr="music/Inner-Vation_-_Lost_in_LA_(getmp3.pro).mp3" data-name="Lost in LA" data-index="12"><span>Lost in LA</span><span>05:12</span></li>
+                    <li data-scr="music/Inner-Vation_-_Movements_04_-_Aural_(getmp3.pro).mp3" data-name="Movements 04" data-index="13"><span>Movements 04</span><span>08:18</span></li>
+                    <li data-scr="music/Inner-Vation_-_Sunset_Boulevard_19_(getmp3.pro).mp3" data-name="Sunset Boulevard 19" data-index="14"><span>Sunset Boulevard 19</span><span>07:21</span></li>
+                </ul>
+                <audio src="" id="audio"></audio>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
