@@ -1,0 +1,22 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}</style>
+<h1 id="weird-algorithim">Weird Algorithim</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/weirdAlgorithim.java">GitHub link</a></p>
+<p>This is the first problem in the CSES competitive programming problem set. I&#39;ve decided to work my through this set in order to get better at competitive programming so that I can succeed in USACO and UIL Computer Science.</p>
+<p> The problem goes like this: You are given a positive integer N from 1 to 10^6. If N is even, you divide it by 2. If N is odd, you multiply it by 3 and add 1. Print out all values N is ever equal to before it hits 1.</p>
+<p>This problem is pretty simple and you&#39;ll probably find the solution right away. The easiest way to solve this is by simulating the value of N until it hits 1. However, there it one element that it is easy to forget to consider here. Most people will take N in as an integer, as 10^6 is far under the maximum integer value. However, some values of N will exceed the maximum integer limit as they get multiplied by 3 repeatedly. This is easily fixed by storing N as a long. Here&#39;s the code for this problem:</p>
+<pre><code>long a = input.nextLong();
+        <span class="hljs-keyword">String</span> <span class="hljs-keyword">output</span> = a + <span class="hljs-string">" "</span>;
+        <span class="hljs-keyword">while</span> (a != <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-keyword">if</span> (a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+            {
+                a /= <span class="hljs-number">2</span>;
+            }
+            <span class="hljs-keyword">else</span> 
+            {
+                a = (a * <span class="hljs-number">3</span>) + <span class="hljs-number">1</span>;
+            }
+            <span class="hljs-keyword">output</span> += a + <span class="hljs-string">" "</span>;
+        }
+        <span class="hljs-keyword">System</span>.out.println(<span class="hljs-keyword">output</span>);
+</code></pre><p>Entry written on 7/28/2022</p>
