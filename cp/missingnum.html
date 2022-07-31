@@ -1,0 +1,19 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}</style>
+<h1 id="missing-number">Missing Number</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/missingNumber.java">GitHub link</a></p>
+<p>This is the second problem in the CSES competitive programming problem set.</p>
+<p>The problem goes like this: you are given all numbers between 1, 2, ..., n except one is missing. Your task is to figure out which one is missing. n will be between 2 and 2 * 10^5. The first line of input will contain n and the second the list of numbers.</p>
+<p>This problem is also pretty simple. There are two main methods to solve this, one requires math and the other doesn&#39;t. Both are O(n). The first method involves using the formula (n * (n + 1)) / 2 to find the sum of all natural numbers until N. Then you can loop through the numbers given and find the sum of all of those. By subtracting these two values, you will find the missing number. The only thing that might trip someone up is forgetting to store the sum of all natural numbers 1 to n as a long, as while n only goes to 2 * 10^5 which is in the integer limit, the sum of all natural numbers up to that point is not. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">long</span> a = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
+        <span class="hljs-keyword">long</span> total = (a * (a + <span class="hljs-number">1</span>))/<span class="hljs-number">2</span>;
+        <span class="hljs-keyword">long</span> incom = <span class="hljs-number">0</span>;
+
+        st = <span class="hljs-keyword">new</span> StringTokenizer(r.readLine());
+        <span class="hljs-built_in">while</span> (st.hasMoreTokens())
+        {
+            incom += Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
+        }
+
+        pw.<span class="hljs-built_in">println</span>((total - incom));
+</code></pre><p>The second way to solve this problem that you might think of is a little more complex and is technically more time inefficient, although not very much. This method involves creating a boolean array the size of n, and marking the index of each number as true once it&#39;s found. After this is done, you loop through and print out the first spot that returns false. This is O(2n), which reduces to O(n). Some issues that might arise if one takes this path is that as the number 0 is not included in the list of numbers, that spot of the array would remain marked as false. A solution for this would be to start at position 1 when checking the array at the end.</p>
+<p>Entry written on 7/30/2022</p>
