@@ -1,2 +1,36 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}</style>
-<p>Coming soon!</p>
+<h1 id="number-spiral">Number Spiral</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/numberSpiral.java">GitHub link</a></p>
+<p>This is the sixth problem in the CSES competitive programming problem set.</p>
+<p>The problem goes like this: This is a number spiral:</p>
+<p><img src="https://cses.fi/file/bba36f2601b99c7edc15865aa2a49e680a271075f30e86aa0e4e18d00a779c21" alt=""></p>
+<p>Find a number in row y and column z.</p>
+<p>This problem has two approaches. First, you could simulate the number spiral in a 2D array. However, this is not very time efficient and likely would not run within the 1 second limit. The second approach is not really programming involved, instead you figure out a mathematical relationship between y and z on the table. When looking for patterns, I noticed that on the Y axis, every odd numbered column is the square of when it appears. So the 1st column is 1, the 3rd is 9, the 5th is 25, and onwards. On the Z axis, every even numbered row is the square of when it appears. So the 2nd is 4, the 4th is 16, ect. In these columns/rows, travelling across the opposite axis results in the value getting lower by 1 for each square on the Z axis, and 1 higher for each square on the Y axis. To determine which axis we are starting at and how far down we are traveling, we can check if the given y or z value is higher. Now we can determine the value of half of the values in the table.</p>
+<p>The next step is to find a relationship between y and z for the other half. This was fairly easy, as you&#39;ll quickly notice that the first value in any even numbered column is just 1 greater than the one in the column before it. As we travel down, they increase instead of decreasing. Here&#39;s the code for this problem:</p>
+<pre><code>if (x == <span class="hljs-number">1</span> &amp;&amp; y == <span class="hljs-number">1</span>)
+            {
+                pw.println(<span class="hljs-number">1</span>);
+            }
+            else if (x &gt; y)
+            {
+                if (x % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
+                {
+                    pw.println((x * x) - y + <span class="hljs-number">1</span>);
+                }
+                else
+                {
+                    pw.println(((x - <span class="hljs-number">1</span>) * (x - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + y);
+                }
+            }
+            else
+            {
+                if (y % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+                {
+                    pw.println((y * y) - x + <span class="hljs-number">1</span>);
+                }
+                else
+                {
+                    pw.println(((y - <span class="hljs-number">1</span>) * (y - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + x);
+                }
+            }
+</code></pre><p>Entry written on 8/2/2022</p>
