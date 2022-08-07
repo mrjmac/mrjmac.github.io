@@ -1,0 +1,56 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}</style>
+<h1 id="palindrome-reorder">Palindrome Reorder</h1>
+<p>This is the twelfth problem in the CSES problem set.</p>
+<p>The problem goes like this: Given a string determine if it&#39;s possible to reorder the letters such that it forms a palindrome. If it is possible, do so.</p>
+<p>The first step of this problem is determining if it&#39;s possible to form a palindrome from the string. If you consider that properties of a palindrome, you&#39;ll realize that only one letter can occur an odd number of times. The first step of our code is to count the frequency of every letter and store it in an array. Then we traverse this array and stop the program if more than 1 letter occurred an odd number of times.</p>
+<p>Now that we know that a palindrome can be formed and have the frequency of each letter, the next step is pretty easy. We just need to loop through our array, and for all but the letter that appears and odd number of times, output each letter half the number of times that it appeared in the original string. Then we output our odd letter so it&#39;s in the middle. Finally, we can loop back through the array in reverse and output each letter half the number of times that it appeared in the original string again. This fully outputs our palindrome.</p>
+<p>While this solution works, it ran out of time on 4 test cases. After a little bit of research, it appeared that the reason for this is because java is extremely slow when adding together substrings, and I was treating the final output as a string. In order to fix this I could either output the final string one char at a time, use a library like stringbuilder, or rewrite my program in c++. In order to be safe, I rewrote my program in c++ and was able to stay under the time limit with ease. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">for</span>(char c : a)
+    {
+        fre<span class="hljs-string">q[c - 'A']</span>++;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++)
+    {
+        <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
+        {
+            oddCount += <span class="hljs-number">1</span>;
+            oddInd = i;
+        }
+    }
+    <span class="hljs-keyword">if</span> (oddCount &gt; <span class="hljs-number">1</span>)
+    {
+        cout &lt;&lt; <span class="hljs-string">"NO SOLUTION"</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++)
+        {
+            <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; fre<span class="hljs-string">q[i]</span> / <span class="hljs-number">2</span>; j++)
+                {
+                    cout &lt;&lt; (char)(i + <span class="hljs-string">'A'</span>);
+                }
+            } 
+        }
+        <span class="hljs-keyword">if</span> (oddInd != <span class="hljs-number">100</span>)
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; fre<span class="hljs-string">q[oddInd]</span>; i++)
+            {
+                cout &lt;&lt; (char)(oddInd + <span class="hljs-string">'A'</span>);
+            }
+        }
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">25</span>; i &gt;= <span class="hljs-number">0</span>; i--)
+        {
+            <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; fre<span class="hljs-string">q[i]</span> / <span class="hljs-number">2</span>; j++)
+                {
+                    cout &lt;&lt; (char)(i + <span class="hljs-string">'A'</span>);
+                }
+            }
+        }
+    }
+</code></pre><p>Entry written on 8/7/2022</p>
