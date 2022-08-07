@@ -1,0 +1,32 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="gray-code">Gray Code</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/grayCode.java">GitHub link</a></p>
+<p>This is the thirteenth problem in the CSES problem set.</p>
+<p>The problem goes like this: A Gray code is a list of all 2n bit strings of length n, where any two successive strings differ in exactly one bit (i.e., their Hamming distance is one). Create a Gray code for a given length n.</p>
+<p>My first two approaches to this problem were completely wrong. I assumed that consecutive numbers in binary would have a hamming distance of 1. This is clearly not the case and I would&#39;ve noticed this had I thought a little harder. </p>
+<p>After unsuccessfully looking for a pattern between binary strings with consecutive hamming distances, I realized that there wasn&#39;t one. I decided that the first step to this problem was to figure out how to generate all binary strings on length n in an efficient manner. My initial plan was to generate the strings and then sort them, however I realized that this wouldn&#39;t be necessary when I figured out how to efficiently generate all the strings. Back when I was solving the problem <a href="https://mrjmac.github.io/cp/bitstr.html">Bit Strings</a>, I realized that each new digit in binary can interact with all previous combinations of digits as either a 1 or a 0. I drew out this method of generating each new binary number in order to visualize how I could sort it.</p>
+<p><img src="https://cdn.discordapp.com/attachments/568225791826198528/1005946821476098089/unknown.png" alt=""></p>
+<p>I noticed that due to the nature of this generation algorithm, it is extremely easy to order the new numbers so that they have a hamming distance of 1. The nth value of each list on the right side are each 1 bit apart. This makes sense, as our generation method takes a value from the previous list and creates two values that have a hamming distance of one from each other. In order for this algorithm to work, the list that I generated the new values off of had to already be a gray code. Thankfully the array[0, 1] meets this requirement. Here&#39;s the method I wrote for this problem:</p>
+<pre><code>public <span class="hljs-keyword">static</span> void add(<span class="hljs-built_in">String</span>[] a, <span class="hljs-built_in">int</span> n, PrintWriter pw, <span class="hljs-built_in">int</span> curr)
+    {
+        <span class="hljs-keyword">if</span> (curr == n)
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
+            {
+                pw.println(a[i])<span class="hljs-comment">;</span>
+            }
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-built_in">String</span>[] <span class="hljs-keyword">next</span> = new <span class="hljs-built_in">String</span>[a.length * <span class="hljs-number">2</span>]<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
+            {
+                <span class="hljs-keyword">next</span>[i] = a[i] + <span class="hljs-string">"0"</span><span class="hljs-comment">;</span>
+                <span class="hljs-keyword">next</span>[<span class="hljs-keyword">next</span>.length - i - <span class="hljs-number">1</span>] = a[i] + <span class="hljs-string">"1"</span><span class="hljs-comment">;</span>
+            }
+            add(<span class="hljs-keyword">next</span>, n, pw, curr + <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+        }
+</code></pre><p>Here&#39;s the driver code for this method</p>
+<pre><code><span class="hljs-keyword">int</span> n = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
+add(<span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>[]{<span class="hljs-string">"0"</span>, <span class="hljs-string">"1"</span>}, n, pw, <span class="hljs-number">1</span>);
+</code></pre><p>Entry written on 8/7/2022</p>
