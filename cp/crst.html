@@ -1,0 +1,53 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="creating-strings">Creating Strings</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/creatingStrings.java">GitHub link</a></p>
+<p>This is the fourteenth problem in the CSES problem set.</p>
+<p>The problem goes like this: Given a string, your task is to generate all different strings that can be created using its characters. Print the number of strings that can be created and then print all strings that can be printed in alphabetical order.</p>
+<p>This problem is pretty challenging, however I already had an idea of how to start. The key trick to this problem is to use recursive backtracking. I learned about this during the problem <a href="https://mrjmac.github.io/cp/palre.html">Gray Code</a>, where I used it to generate all possible binary strings of length n. However, recursive backtracking did not turn out to be very helpful for that problem. The first step to this problem is to count the number of times that each letter appears in the given string. This is important, as the output strings can only contain the same number of each letter as the input string does. Next, we call our recursive function and pass in a blank string. This function has 5 steps.</p>
+<ol>
+<li>If the length of the string passed in is equal to the length of the input string, add the string passed in into an arraylist. </li>
+<li>Otherwise, loop through our letter frequency array. </li>
+<li>If the frequency of a letter is greater than 0, decrease the frequency by 1. This is to indicate that it has been used.</li>
+<li>Call the function again but instead of passing in an empty string, pass in the string that was originally passed in + whatever letter we accessed from the frequency array.</li>
+<li>Once that recursive call finishes, increase the frequency of the letter by 1. This is because if the recursive call is done, then the letter is no longer in our string.</li>
+</ol>
+<p>Finally, I just had to output the length of our array and all items in the array. Here&#39;s the recursive method for this problem:</p>
+<pre><code>public static void create(String a, <span class="hljs-keyword">int</span>[] freq, <span class="hljs-keyword">int</span> n)
+    {
+        <span class="hljs-keyword">if</span> (a.length() == n)
+        {
+            combs.add(a);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; freq.length; i++)
+            {
+                <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> &gt; <span class="hljs-number">0</span>)
+                {
+                    fre<span class="hljs-string">q[i]</span> -= <span class="hljs-number">1</span>;
+                    create(a + (char)(i + <span class="hljs-number">97</span>), freq, n);
+                    fre<span class="hljs-string">q[i]</span> += <span class="hljs-number">1</span>;
+                }
+            }
+        }
+    }
+</code></pre><p>Here&#39;s the driver code for this method:</p>
+<pre><code><span class="hljs-keyword">String</span> a = st.nextToken();
+        <span class="hljs-keyword">int</span> n = a.length();
+        <span class="hljs-keyword">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];
+
+        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        {
+            freq[a.charAt(i) - <span class="hljs-number">97</span>] += <span class="hljs-number">1</span>;
+        }
+
+        create(<span class="hljs-string">""</span>, freq, n);
+
+        pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">size</span>());
+        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; combs.<span class="hljs-built_in">size</span>(); i++)
+        {
+            pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">get</span>(i));
+        }
+
+        pw.<span class="hljs-built_in">close</span>();
+</code></pre><p>Entry written on 8/10/2022</p>
