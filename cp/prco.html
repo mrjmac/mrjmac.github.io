@@ -1,0 +1,14 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="promotion-counting">Promotion Counting</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/promotionCounting.java">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=591">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is incredibly easy and is really just basic math. Here&#39;s the code for this problem:</p>
+<pre><code>int gold = pa - pb<span class="hljs-comment">;</span>
+        int silver = ga - gb + pa - pb<span class="hljs-comment">;</span>
+        int <span class="hljs-keyword">bronze </span>= sa - <span class="hljs-keyword">sb </span>+ ga - gb + pa - pb<span class="hljs-comment">;</span>
+
+        pw.println(<span class="hljs-keyword">bronze);
+</span>        pw.println(silver)<span class="hljs-comment">;</span>
+        pw.println(gold)<span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 8/10/2022</p>

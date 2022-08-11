@@ -1,0 +1,14 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="do-you-know-your-abcs">Do You Know Your ABCs</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/doYouKnowYourABCs.java">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=1059">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is more math. We know that the two smallest values with be a and b. We know that the largest value will be the sum of a, b, and c. Therefore, we can put all the given values into an array and sort it. Once this is done, we can print out our first and second values in the array as those are a and b, and then we can print out the final value minus the first two as that will equal c. This is because (a + b + c) - a - b reduces to c. Here&#39;s the code for this problem:</p>
+<pre><code>for (<span class="hljs-name">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 7; i++)</span>
+        {
+            nums[i] = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
+        }
+        Arrays.sort(<span class="hljs-name">nums</span>)<span class="hljs-comment">;</span>
+        pw.println(<span class="hljs-name">nums</span>[<span class="hljs-number">0</span>] + <span class="hljs-string">" "</span> + nums[<span class="hljs-number">1</span>] + <span class="hljs-string">" "</span> + (<span class="hljs-name">nums</span>[<span class="hljs-number">6</span>] - nums[<span class="hljs-number">1</span>] - nums[<span class="hljs-number">0</span>]))<span class="hljs-comment">;</span>
+        pw.close()<span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 8/10/2022</p>
