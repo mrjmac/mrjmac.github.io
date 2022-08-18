@@ -1,0 +1,25 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="blocked-billboard">Blocked Billboard</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/edit/main/USACO/blockedBillboard.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=759">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is just a 2D version of <a href="https://mrjmac.github.io/cp/fepa.html">Fence Painting</a>. The solving principle of finding the intersection of the billboards remains the same here. However, this time we find two different lengths and multiply them in order to find the total area blocked. Originally my code for this was rather unreadable, however after getting all the test cases correct I went back and changed my code to use a struct as the usaco.guide solution used one to make it more readable. Here&#39;s the code for this problem:</p>
+<pre><code>struct <span class="hljs-keyword">board </span>{
+    int x1, x2, y1, y2<span class="hljs-comment">;</span>
+    int area()
+    {
+        return (x2 - x1) * (y2 - y1)<span class="hljs-comment">;</span>
+    }
+}<span class="hljs-comment">;</span>
+
+int overlap(<span class="hljs-keyword">board </span>a, <span class="hljs-keyword">board </span><span class="hljs-keyword">b)
+</span>{
+    int xO = max(min(a.x2, <span class="hljs-keyword">b.x2) </span>- max(a.x1, <span class="hljs-keyword">b.x1), </span><span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+    int yO = max(min(a.y2, <span class="hljs-keyword">b.y2) </span>- max(a.y1, <span class="hljs-keyword">b.y1), </span><span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+    return xO * yO<span class="hljs-comment">;</span>
+
+}
+
+cout &lt;&lt; <span class="hljs-keyword">ba.area() </span>+ <span class="hljs-keyword">bb.area() </span>- (overlap(<span class="hljs-keyword">ba, </span>truck) + overlap(<span class="hljs-keyword">bb, </span>truck))<span class="hljs-comment">;</span>
+}
+</code></pre><p>Entry written on 8/17/2022</p>
