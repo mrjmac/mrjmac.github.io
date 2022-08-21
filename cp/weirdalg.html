@@ -4,18 +4,18 @@
 <p> The problem goes like this: You are given a positive integer n from 1 to 10^6. If n is even, you divide it by 2. If n is odd, you multiply it by 3 and add 1. Print out all values n is ever equal to before it hits 1.</p>
 <p>This problem is pretty simple and you&#39;ll probably find the solution right away. The easiest way to solve this is by simulating the value of n until it hits 1. However, there it one element that it is easy to forget to consider here. Most people will take n in as an integer, as 10^6 is far under the maximum integer value. However, some values of n will exceed the maximum integer limit as they get multiplied by 3 repeatedly. This is easily fixed by storing N as a long. Here&#39;s the code for this problem:</p>
 <pre><code>long a = input.nextLong();
-        <span class="hljs-keyword">String</span> <span class="hljs-keyword">output</span> = a + <span class="hljs-string">" "</span>;
-        <span class="hljs-keyword">while</span> (a != <span class="hljs-number">1</span>)
-        {
-            <span class="hljs-keyword">if</span> (a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
-            {
-                a /= <span class="hljs-number">2</span>;
-            }
-            <span class="hljs-keyword">else</span> 
-            {
-                a = (a * <span class="hljs-number">3</span>) + <span class="hljs-number">1</span>;
-            }
-            <span class="hljs-keyword">output</span> += a + <span class="hljs-string">" "</span>;
-        }
-        <span class="hljs-keyword">System</span>.out.println(<span class="hljs-keyword">output</span>);
+<span class="hljs-keyword">String</span> <span class="hljs-keyword">output</span> = a + <span class="hljs-string">" "</span>;
+<span class="hljs-keyword">while</span> (a != <span class="hljs-number">1</span>)
+{
+    <span class="hljs-keyword">if</span> (a % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+    {
+        a /= <span class="hljs-number">2</span>;
+    }
+    <span class="hljs-keyword">else</span> 
+    {
+        a = (a * <span class="hljs-number">3</span>) + <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">output</span> += a + <span class="hljs-string">" "</span>;
+}
+<span class="hljs-keyword">System</span>.out.println(<span class="hljs-keyword">output</span>);
 </code></pre><p>Entry written on 7/28/2022</p>

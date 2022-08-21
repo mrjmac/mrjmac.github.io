@@ -13,7 +13,7 @@
 <p>As you can see in the above image, the formation requires three squares on the Y axis. Therefore, it will fit in all Y positions until the last two. We can define the number of formations that exist with the expression k - 2.</p>
 <p>By multiplying k - 2 by k - 1 we find the total number of 2 x 3 grids on the board. However, for each 2 x 3 grid there are two positions in which the knights can take each other. Additionally, knights can also take each other in 3 x 2 grids. However, as the board is a square there are the same number of 3 x 2 grids as there are 2 x 3 grids. In order to account for both of these issues we multiply our expression by 4. Our final expression for the number of places where two knights cannot be is (4 * (K - 1) * (K - 2)). Finally, we can subtract this from our starting equation to get a final equation of (((K^2) * ((K^2) - 1)) / 2) - (4 * (K - 1) * (K - 2)). Here&#39;s the code for this problem:</p>
 <pre><code>for (<span class="hljs-name">long</span> i = <span class="hljs-number">1</span><span class="hljs-comment">; i &lt;= num; i++)</span>
-        {
-            pw.println(((<span class="hljs-name">i</span> * i) * ((<span class="hljs-name">i</span> * i) - 1) / 2) - (4 * (<span class="hljs-name">i</span> - <span class="hljs-number">1</span>) * (i - 2)));
-        }
+{
+    pw.println(((<span class="hljs-name">i</span> * i) * ((<span class="hljs-name">i</span> * i) - 1) / 2) - (4 * (<span class="hljs-name">i</span> - <span class="hljs-number">1</span>) * (i - 2)));
+}
 </code></pre><p>Entry written on 8/2/2022</p>

@@ -9,31 +9,31 @@
 <p>2 4</p>
 <p>I noticed after writing these possibilities down that no matter how I add coins to the piles, 3 coins are being added overall. Therefore, if a given pile meets the first rule in the above paragraph and is divisible by 3, the pile can be emptied. Here&#39;s the code for this problem:</p>
 <pre><code><span class="hljs-built_in">if</span> (a &gt; b)
-            {
-                <span class="hljs-built_in">if</span> (b * <span class="hljs-number">2</span> &lt; a)
-                {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
-                }
-                <span class="hljs-built_in">else</span> <span class="hljs-built_in">if</span> ((a + b) % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>)
-                {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"YES"</span>);
-                }
-                <span class="hljs-built_in">else</span> {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
-                }
-            }
-            <span class="hljs-built_in">else</span>
-            {
-                <span class="hljs-built_in">if</span> (a * <span class="hljs-number">2</span> &lt; b)
-                {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
-                }
-                <span class="hljs-built_in">else</span> <span class="hljs-built_in">if</span> ((a + b) % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>)
-                {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"YES"</span>);
-                }
-                <span class="hljs-built_in">else</span> {
-                    pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
-                }
-            }
+{
+    <span class="hljs-built_in">if</span> (b * <span class="hljs-number">2</span> &lt; a)
+    {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
+    }
+    <span class="hljs-built_in">else</span> <span class="hljs-built_in">if</span> ((a + b) % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>)
+    {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"YES"</span>);
+    }
+    <span class="hljs-built_in">else</span> {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
+    }
+}
+<span class="hljs-built_in">else</span>
+{
+    <span class="hljs-built_in">if</span> (a * <span class="hljs-number">2</span> &lt; b)
+    {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
+    }
+    <span class="hljs-built_in">else</span> <span class="hljs-built_in">if</span> ((a + b) % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>)
+    {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"YES"</span>);
+    }
+    <span class="hljs-built_in">else</span> {
+        pw.<span class="hljs-built_in">println</span>(<span class="hljs-string">"NO"</span>);
+    }
+}
 </code></pre><p>Entry written on 8/5/2022</p>

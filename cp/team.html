@@ -5,17 +5,17 @@
 <p>The problem goes like this: The first line of input contains an integer n, the number of problems in a competitive programming contest. 3 friends are working together in this contest and have agreed to only solve a problem if the majority of them know how to solve it. The next n lines of input contain 3 integers, each of which reflects each of the friends view on the problem. Output the number of problems that the friends attempt.</p>
 <p>This problem is also pretty easy. For each problem, we just check if the sum of all integers on the line is greater than 1. If it is, we increment a counter. Here&#39;s the code for this problem:</p>
 <pre><code>for (<span class="hljs-name">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; n; i ++)</span>
-        {
-            st = new StringTokenizer(<span class="hljs-name">r</span>.readLine())<span class="hljs-comment">;</span>
-            a = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
-            b = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
-            c = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
+{
+    st = new StringTokenizer(<span class="hljs-name">r</span>.readLine())<span class="hljs-comment">;</span>
+    a = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
+    b = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
+    c = Integer.parseInt(<span class="hljs-name">st</span>.nextToken())<span class="hljs-comment">;</span>
 
-            if (<span class="hljs-name">a</span> + b + c &gt; <span class="hljs-number">1</span>)
-            {
-                result += <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-            }
+    if (<span class="hljs-name">a</span> + b + c &gt; <span class="hljs-number">1</span>)
+    {
+        result += <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+    }
 
-        }
-        pw.println(<span class="hljs-name">result</span>)<span class="hljs-comment">;</span>
+}
+pw.println(<span class="hljs-name">result</span>)<span class="hljs-comment">;</span>
 </code></pre><p>Entry written on 8/10/2022</p>

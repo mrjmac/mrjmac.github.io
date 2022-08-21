@@ -4,20 +4,19 @@
 <p>The problem goes like this: You are given a string that contains a DNA sequence, which is made up of the letters A, C, G, and T. Your task is to find the longest repetition in the sequence. </p>
 <p>This problem is very straight forward and can be solved in O(n) fashion. Starting at the 2nd character of the string, compare all characters in the string from then on to the one before them 1 by 1. If it&#39;s the same as the previous, increment a counter. If it&#39;s different, reset this counter to 0. If the counter is ever above the max, which is 1 by default, set the max to the counter. Here&#39;s the code for this problem:</p>
 <pre><code>for (<span class="hljs-name">int</span> j = <span class="hljs-number">2</span><span class="hljs-comment">; j &lt;= test.length(); j++)</span>
+{
+    if(<span class="hljs-name">test</span>.substring(<span class="hljs-name">j</span> - <span class="hljs-number">1</span>, j).equals(<span class="hljs-name">test</span>.substring(<span class="hljs-name">j</span> - <span class="hljs-number">2</span>, j - <span class="hljs-number">1</span>)))
+    {
+        count += <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        if (<span class="hljs-name">count</span> &gt; max)
         {
-            if(<span class="hljs-name">test</span>.substring(<span class="hljs-name">j</span> - <span class="hljs-number">1</span>, j).equals(<span class="hljs-name">test</span>.substring(<span class="hljs-name">j</span> - <span class="hljs-number">2</span>, j - <span class="hljs-number">1</span>)))
-            {
-                count += <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-                if (<span class="hljs-name">count</span> &gt; max)
-                {
-                    max = count<span class="hljs-comment">;</span>
-                }
-
-            }
-            else
-            {
-                count = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-            }
+            max = count<span class="hljs-comment">;</span>
         }
-        pw.println(<span class="hljs-name">max</span>)<span class="hljs-comment">;</span>
+    }
+    else
+    {
+         count = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+    }
+}
+pw.println(<span class="hljs-name">max</span>)<span class="hljs-comment">;</span>
 </code></pre><p>Entry written on 7/31/2022</p>

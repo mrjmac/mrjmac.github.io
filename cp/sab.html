@@ -6,7 +6,7 @@
 <p>This problem is extremely basic. All we need to do is find the sum of 1 to w and multiply the base cost of a banana by that value. To do this, we can use the summation formula: w * (w + 1) / 2. </p>
 <p>The reason why this works is because (4 * 1) + (4 * 2) is the same as 4 * 3, because you are adding 3 4s together. Then all we have to do is take the max of the total cost minus how much money the soldier starts with and 0. Here&#39;s the code for this problem:</p>
 <pre><code><span class="hljs-keyword">long</span> cost = w * (w + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
-        cost *= k;
-        pw.<span class="hljs-built_in">println</span>(Math.<span class="hljs-built_in">max</span>(cost - n, <span class="hljs-number">0</span>));
-        pw.<span class="hljs-built_in">close</span>();
+cost *= k;
+pw.<span class="hljs-built_in">println</span>(Math.<span class="hljs-built_in">max</span>(cost - n, <span class="hljs-number">0</span>));
+pw.<span class="hljs-built_in">close</span>();
 </code></pre><p>Entry written on 8/10/2022</p>

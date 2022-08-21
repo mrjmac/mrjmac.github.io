@@ -8,24 +8,25 @@
 <p><img src="https://cdn.discordapp.com/attachments/568225791826198528/1005946821476098089/unknown.png" alt=""></p>
 <p>I noticed that due to the nature of this generation algorithm, it is extremely easy to order the new numbers so that they have a hamming distance of 1. The nth value of each list on the right side are each 1 bit apart. This makes sense, as our generation method takes a value from the previous list and creates two values that have a hamming distance of one from each other. In order for this algorithm to work, the list that I generated the new values off of had to already be a gray code. Thankfully the array[0, 1] meets this requirement. Here&#39;s the method I wrote for this problem:</p>
 <pre><code>public <span class="hljs-keyword">static</span> void add(<span class="hljs-built_in">String</span>[] a, <span class="hljs-built_in">int</span> n, PrintWriter pw, <span class="hljs-built_in">int</span> curr)
+{
+    <span class="hljs-keyword">if</span> (curr == n)
     {
-        <span class="hljs-keyword">if</span> (curr == n)
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
         {
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
-            {
-                pw.println(a[i])<span class="hljs-comment">;</span>
-            }
+            pw.println(a[i])<span class="hljs-comment">;</span>
         }
-        <span class="hljs-keyword">else</span>
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-built_in">String</span>[] <span class="hljs-keyword">next</span> = new <span class="hljs-built_in">String</span>[a.length * <span class="hljs-number">2</span>]<span class="hljs-comment">;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
         {
-            <span class="hljs-built_in">String</span>[] <span class="hljs-keyword">next</span> = new <span class="hljs-built_in">String</span>[a.length * <span class="hljs-number">2</span>]<span class="hljs-comment">;</span>
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; a.length; i++)</span>
-            {
-                <span class="hljs-keyword">next</span>[i] = a[i] + <span class="hljs-string">"0"</span><span class="hljs-comment">;</span>
-                <span class="hljs-keyword">next</span>[<span class="hljs-keyword">next</span>.length - i - <span class="hljs-number">1</span>] = a[i] + <span class="hljs-string">"1"</span><span class="hljs-comment">;</span>
-            }
-            add(<span class="hljs-keyword">next</span>, n, pw, curr + <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">next</span>[i] = a[i] + <span class="hljs-string">"0"</span><span class="hljs-comment">;</span>
+            <span class="hljs-keyword">next</span>[<span class="hljs-keyword">next</span>.length - i - <span class="hljs-number">1</span>] = a[i] + <span class="hljs-string">"1"</span><span class="hljs-comment">;</span>
         }
+        add(<span class="hljs-keyword">next</span>, n, pw, curr + <span class="hljs-number">1</span>)<span class="hljs-comment">;</span>
+    }
+}
 </code></pre><p>Here&#39;s the driver code for this method</p>
 <pre><code><span class="hljs-keyword">int</span> n = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
 add(<span class="hljs-keyword">new</span> <span class="hljs-keyword">String</span>[]{<span class="hljs-string">"0"</span>, <span class="hljs-string">"1"</span>}, n, pw, <span class="hljs-number">1</span>);

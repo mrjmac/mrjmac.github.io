@@ -7,36 +7,35 @@
 <p>Now that I knew what a beautiful permutation was, this problem seemed incredibly easy. However, this is probably the most frustrating problem I&#39;ve had to do so far. The logic behind the code is incredibly simple, and my solving method never changed throughout the entire process. If you think about it, a beautiful permutation will always exist for every number besides 2 and 3. This is because even and odd numbers are never adjacent, and after 3 there are enough of these to always have a layer of separation. My code first checks if the number is 2 or 3, and if it is, it outputs &quot;NO SOLUTION&quot;. After that, we just have to print out a beautiful permutation, which will always exist. I used two for loops to print out the even and the odd numbers up until n. It&#39;s important to print out the even numbers first, as if you print out the odd numbers first when n = 4, you&#39;ll get 1 3 2 4 which is not a beautiful permutation as 2 and 3 are adjacent. </p>
 <p>However, submitting my code is when issues arose. No matter what changes I made, I could not get under the time limit on the last 9 cases. I looked online after 30 minutes of trying to find an issue with my solving method, but I could not find an alternative way to do this problem. Eventually I caved and rewrote my code in C++, and managed to get under the time limit with extreme ease, only using .1/1 seconds. Here&#39;s the code for this problem:</p>
 <pre><code><span class="hljs-attribute">if</span> (num == <span class="hljs-number">3</span> || num == <span class="hljs-number">2</span>)
+{
+    <span class="hljs-attribute">cout</span> &lt;&lt; <span class="hljs-string">"NO SOLUTION"</span> &lt;&lt; endl;
+}
+<span class="hljs-section">else</span>
+{
+    <span class="hljs-attribute">for</span> (int i = <span class="hljs-number">2</span>; <span class="hljs-attribute">i</span> &lt;= num; <span class="hljs-attribute">i</span> += <span class="hljs-number">2</span>)
     {
-        <span class="hljs-attribute">cout</span> &lt;&lt; <span class="hljs-string">"NO SOLUTION"</span> &lt;&lt; endl;
+        <span class="hljs-attribute">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span>;
     }
-    <span class="hljs-section">else</span>
+    <span class="hljs-attribute">for</span> (int i = <span class="hljs-number">1</span>; <span class="hljs-attribute">i</span> &lt;= num; <span class="hljs-attribute">i</span> += <span class="hljs-number">2</span>)
     {
-        <span class="hljs-attribute">for</span> (int i = <span class="hljs-number">2</span>; <span class="hljs-attribute">i</span> &lt;= num; <span class="hljs-attribute">i</span> += <span class="hljs-number">2</span>)
-        {
-            <span class="hljs-attribute">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span>;
-        }
-        <span class="hljs-attribute">for</span> (int i = <span class="hljs-number">1</span>; <span class="hljs-attribute">i</span> &lt;= num; <span class="hljs-attribute">i</span> += <span class="hljs-number">2</span>)
-        {
-            <span class="hljs-attribute">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span>;
-        }
+        <span class="hljs-attribute">cout</span> &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span>;
     }
+}
 </code></pre><p>I wanted to figure out how to do this with Java, so I stopped using Scanner and changed to using BufferedReader, PrintWriter, and StringTokenizer. Now I&#39;ve gone back and reworked all my old problems using these to adjust to using them, but my solution worked fine with these instead of scanner. Here&#39;s the Java code for this problem:</p>
 <pre><code> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">num</span> == <span class="hljs-number">3</span> || <span class="hljs-built_in">num</span> == <span class="hljs-number">2</span>)
-        {
-            pw.println(<span class="hljs-string">"NO SOLUTION"</span>);
-        }
-        <span class="hljs-keyword">else</span>
-        {
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-built_in">num</span>; i += <span class="hljs-number">2</span>)
-            {
-                pw.<span class="hljs-built_in">print</span>(i + <span class="hljs-string">" "</span>);
-            }
-
-            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-built_in">num</span>; i += <span class="hljs-number">2</span>)
-            {
-                pw.<span class="hljs-built_in">print</span>(i + <span class="hljs-string">" "</span>);
-            }
-        }
+{
+    pw.println(<span class="hljs-string">"NO SOLUTION"</span>);
+}
+<span class="hljs-keyword">else</span>
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-built_in">num</span>; i += <span class="hljs-number">2</span>)
+    {
+        pw.<span class="hljs-built_in">print</span>(i + <span class="hljs-string">" "</span>);
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-built_in">num</span>; i += <span class="hljs-number">2</span>)
+    {
+        pw.<span class="hljs-built_in">print</span>(i + <span class="hljs-string">" "</span>);
+    }
+}
 </code></pre><p>CSES allows you to view other people&#39;s solutions after you&#39;ve gotten the problem right. I was unable to find anyone using Java who could get this to work using System.out and Scanner. It seems this problem is only possible using C++ or another input/output form.</p>
 <p>Entry written on 7/31/2022</p>

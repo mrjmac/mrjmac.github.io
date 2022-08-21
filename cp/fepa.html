@@ -5,6 +5,6 @@
 <p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=567">here</a>&#39;s a link to it so you can read it.</p>
 <p>This problem is very simple and is just pure math. In order to find the total length painted, we just need to add both of the original lengths before subtracting the length in the middle where the two lengths overlap. If we define the first length as A, B and the second length as C, D, then the overlap can only exist if B - C is positive. However, this problem does not guarantee that line AB comes before CD. In order to fix this, we have to take the minimum value of B and D as that value is the end of the first line segment. Additionally, we have to find the maximum value of A and C as that is the start of the second line segment. Here&#39;s the code for this problem:</p>
 <pre><code>int falseTotal = (<span class="hljs-name">b</span> - a) + (<span class="hljs-name">d</span> - c)<span class="hljs-comment">;</span>
-    int intersection = max(<span class="hljs-name">min</span>(<span class="hljs-name">b</span>, d) - max(<span class="hljs-name">a</span>, c), <span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
-    cout &lt;&lt; falseTotal - intersection &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+int intersection = max(<span class="hljs-name">min</span>(<span class="hljs-name">b</span>, d) - max(<span class="hljs-name">a</span>, c), <span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+cout &lt;&lt; falseTotal - intersection &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
 </code></pre><p>Entry written on 8/17/2022</p>

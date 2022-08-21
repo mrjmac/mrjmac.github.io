@@ -7,29 +7,29 @@
 <p>This problem has two approaches. First, you could simulate the number spiral in a 2D array. However this is not very time efficient and likely would not run within the 1 second limit. The second approach does not involve that much programming. Instead, you figure out a mathematical relationship between y and z on the table. When looking for patterns I noticed that on the Y axis, every odd numbered column is the square of when it appears. So the 1st column is 1, the 3rd is 9, the 5th is 25, and onwards. On the Z axis, every even numbered row is the square of when it appears. So the 2nd is 4, the 4th is 16, ect. In these columns/rows, travelling across the opposite axis results in the value getting lower by 1 for each square on the Z axis, and 1 higher for each square on the Y axis. To determine which axis we are starting at and how far down we are traveling, we can check if the given y or z value is higher. Now we can determine the value of half of the values in the table.</p>
 <p>The next step is to find a relationship between y and z for the other half. This was fairly easy, as you&#39;ll quickly notice that the first value in any even numbered column is just 1 greater than the one in the column before it. As we travel down, they increase instead of decreasing. Here&#39;s the code for this problem:</p>
 <pre><code>if (x == <span class="hljs-number">1</span> &amp;&amp; y == <span class="hljs-number">1</span>)
-            {
-                pw.println(<span class="hljs-number">1</span>);
-            }
-            else if (x &gt; y)
-            {
-                if (x % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
-                {
-                    pw.println((x * x) - y + <span class="hljs-number">1</span>);
-                }
-                else
-                {
-                    pw.println(((x - <span class="hljs-number">1</span>) * (x - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + y);
-                }
-            }
-            else
-            {
-                if (y % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
-                {
-                    pw.println((y * y) - x + <span class="hljs-number">1</span>);
-                }
-                else
-                {
-                    pw.println(((y - <span class="hljs-number">1</span>) * (y - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + x);
-                }
-            }
+{
+    pw.println(<span class="hljs-number">1</span>);
+}
+else if (x &gt; y)
+{
+    if (x % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
+    {
+        pw.println((x * x) - y + <span class="hljs-number">1</span>);
+    }
+    else
+    {
+        pw.println(((x - <span class="hljs-number">1</span>) * (x - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + y);
+    }
+}
+else
+{
+    if (y % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+    {
+        pw.println((y * y) - x + <span class="hljs-number">1</span>);
+    }
+    else
+    {
+        pw.println(((y - <span class="hljs-number">1</span>) * (y - <span class="hljs-number">1</span>)) + <span class="hljs-number">1</span> - <span class="hljs-number">1</span> + x);
+    }
+}
 </code></pre><p>Entry written on 8/2/2022</p>

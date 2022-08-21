@@ -4,7 +4,7 @@
 <p>The problem goes like this: given a number n, calculate the number of trailing zeros in factorial n!.</p>
 <p>This problem is 100% pure math. If you think about it, what we really need to find is the number of times that 5 is a factor of n. This is because the only way to arrive at another 0 at the end of your product is if the number is multiplied by 10. Five is in every pair that multiplies to any multiple of 10. However, just retuning n / 5 does not give the right answer. This is because some numbers like 25 are made up of two fives, adding two more uncounted fives to the mix. In order to solve this problem, I had to take into account all numbers that are exponents of 5. Here&#39;s the code for this problem:</p>
 <pre><code><span class="hljs-keyword">for</span> (int <span class="hljs-built_in">i</span> = <span class="hljs-number">5</span>; n / <span class="hljs-built_in">i</span> &gt;= <span class="hljs-number">1</span>; <span class="hljs-built_in">i</span> *= <span class="hljs-number">5</span>)
-        {
-            ans += n / i;
-        }
+{
+    ans += n / i;
+}
 </code></pre><p>Entry written on 8/4/2022</p>

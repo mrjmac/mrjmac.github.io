@@ -5,7 +5,7 @@
 <p>The problem goes like this: given a bit string of length n, calculate the total number of variations of this string that can be formed.</p>
 <p>One might think that the approach to this problem is to generate every possible string and increment a variable for each one. This would be extremely slow which is not good considering that n can go up to 10 ^ 6. Instead it&#39;s important to understand what this question is asking. A bit string is a binary string. The entire point of binary is to count and so the highest value would be equal to the number of variations. As each extra digit in binary doubles the maximum value that can be represented as the new digit represents 2 values that can each be added to all the previous values, the answer to this problem is equal to 2 ^ n. However, it is not possible to just do this computation and store it in a long or a float. The 2 ^ (10 ^ 6) is significantly higher than both the long and float maximum values. Instead, you have to use the Big Integer or Big Double class. Here&#39;s the code for this problem:</p>
 <pre><code><span class="hljs-attribute">int n</span> = Integer.parseInt(st.nextToken());
-<span class="hljs-attribute">        BigDecimal ans</span> = new BigDecimal(2);
-<span class="hljs-attribute">        BigDecimal div</span> = new BigDecimal(1000000007);
-<span class="hljs-attribute">        ans</span> = ans.pow(n).remainder(div);
+<span class="hljs-attribute">BigDecimal ans</span> = new BigDecimal(2);
+<span class="hljs-attribute">BigDecimal div</span> = new BigDecimal(1000000007);
+<span class="hljs-attribute">ans</span> = ans.pow(n).remainder(div);
 </code></pre><p>Entry written on 8/3/2022</p>

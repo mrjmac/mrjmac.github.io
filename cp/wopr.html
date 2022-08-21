@@ -5,34 +5,33 @@
 <p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=987">here</a>&#39;s a link to it so you can read it.</p>
 <p>This problem is pretty simple and simply parsing through the input will result in an O(n) solution. All we have to do is keep track of our current letter count and if we are over the limit we move the next word to a new line. In order to avoid adding spaces to the end of a line, we have to make sure that the next word fits before we add one. However, this can cause of to go out of bounds on the final word. To prevent this, I added a short circuit or statement so that the compiler will never attempt to access an out of bounds index. Here&#39;s the code for this problem:</p>
 <pre><code>String[] <span class="hljs-built_in">words</span> = r.readLine().split(<span class="hljs-string">" "</span>);
-        int currChar = <span class="hljs-number">0</span>;
+int currChar = <span class="hljs-number">0</span>;
 
-        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; n; i++)
+<span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; n; i++)
+{
+    <span class="hljs-keyword">if</span> (currChar + <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>() &lt;= k)
+    {
+        currChar += <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>();
+        <span class="hljs-keyword">if</span> (i == n - <span class="hljs-number">1</span> || currChar + <span class="hljs-built_in">words</span>[i + <span class="hljs-number">1</span>].<span class="hljs-built_in">length</span>() &gt; k)
         {
-            <span class="hljs-keyword">if</span> (currChar + <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>() &lt;= k)
-            {
-                currChar += <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>();
-                <span class="hljs-keyword">if</span> (i == n - <span class="hljs-number">1</span> || currChar + <span class="hljs-built_in">words</span>[i + <span class="hljs-number">1</span>].<span class="hljs-built_in">length</span>() &gt; k)
-                {
-                    pw.print(<span class="hljs-built_in">words</span>[i]);
-                }
-                <span class="hljs-keyword">else</span>
-                {
-                    pw.print(<span class="hljs-built_in">words</span>[i] + <span class="hljs-string">" "</span>);
-                }
-
-            }
-            <span class="hljs-keyword">else</span>
-            {
-                currChar = <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>();
-                <span class="hljs-keyword">if</span> (i == n - <span class="hljs-number">1</span> || currChar + <span class="hljs-built_in">words</span>[i + <span class="hljs-number">1</span>].<span class="hljs-built_in">length</span>() &gt; k)
-                {
-                    pw.print(<span class="hljs-string">"\n"</span> + <span class="hljs-built_in">words</span>[i]);
-                }
-                <span class="hljs-keyword">else</span>
-                {
-                    pw.print(<span class="hljs-string">"\n"</span> + <span class="hljs-built_in">words</span>[i] + <span class="hljs-string">" "</span>);
-                }
-            }
+            pw.print(<span class="hljs-built_in">words</span>[i]);
         }
+        <span class="hljs-keyword">else</span>
+        {
+            pw.print(<span class="hljs-built_in">words</span>[i] + <span class="hljs-string">" "</span>);
+        }
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        currChar = <span class="hljs-built_in">words</span>[i].<span class="hljs-built_in">length</span>();
+        <span class="hljs-keyword">if</span> (i == n - <span class="hljs-number">1</span> || currChar + <span class="hljs-built_in">words</span>[i + <span class="hljs-number">1</span>].<span class="hljs-built_in">length</span>() &gt; k)
+        {
+            pw.print(<span class="hljs-string">"\n"</span> + <span class="hljs-built_in">words</span>[i]);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            pw.print(<span class="hljs-string">"\n"</span> + <span class="hljs-built_in">words</span>[i] + <span class="hljs-string">" "</span>);
+        }
+    }
+}
 </code></pre><p>Entry written on 8/10/2022</p>
