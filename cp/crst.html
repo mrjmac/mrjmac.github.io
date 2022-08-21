@@ -13,41 +13,41 @@
 </ol>
 <p>Finally, I just had to output the length of our array and all items in the array. Here&#39;s the recursive method for this problem:</p>
 <pre><code>public static void create(String a, <span class="hljs-keyword">int</span>[] freq, <span class="hljs-keyword">int</span> n)
+{
+    <span class="hljs-keyword">if</span> (a.length() == n)
     {
-        <span class="hljs-keyword">if</span> (a.length() == n)
+        combs.add(a);
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; freq.length; i++)
         {
-            combs.add(a);
-        }
-        <span class="hljs-keyword">else</span>
-        {
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; freq.length; i++)
+            <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> &gt; <span class="hljs-number">0</span>)
             {
-                <span class="hljs-keyword">if</span> (fre<span class="hljs-string">q[i]</span> &gt; <span class="hljs-number">0</span>)
-                {
-                    fre<span class="hljs-string">q[i]</span> -= <span class="hljs-number">1</span>;
-                    create(a + (char)(i + <span class="hljs-number">97</span>), freq, n);
-                    fre<span class="hljs-string">q[i]</span> += <span class="hljs-number">1</span>;
-                }
+                fre<span class="hljs-string">q[i]</span> -= <span class="hljs-number">1</span>;
+                create(a + (char)(i + <span class="hljs-number">97</span>), freq, n);
+                fre<span class="hljs-string">q[i]</span> += <span class="hljs-number">1</span>;
             }
         }
     }
+}
 </code></pre><p>Here&#39;s the driver code for this method:</p>
 <pre><code><span class="hljs-keyword">String</span> a = st.nextToken();
-        <span class="hljs-keyword">int</span> n = a.length();
-        <span class="hljs-keyword">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];
+<span class="hljs-keyword">int</span> n = a.length();
+<span class="hljs-keyword">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];
 
-        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
-        {
-            freq[a.charAt(i) - <span class="hljs-number">97</span>] += <span class="hljs-number">1</span>;
-        }
+<span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+{
+    freq[a.charAt(i) - <span class="hljs-number">97</span>] += <span class="hljs-number">1</span>;
+}
 
-        create(<span class="hljs-string">""</span>, freq, n);
+create(<span class="hljs-string">""</span>, freq, n);
 
-        pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">size</span>());
-        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; combs.<span class="hljs-built_in">size</span>(); i++)
-        {
-            pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">get</span>(i));
-        }
+pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">size</span>());
+<span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; combs.<span class="hljs-built_in">size</span>(); i++)
+{
+    pw.<span class="hljs-built_in">println</span>(combs.<span class="hljs-built_in">get</span>(i));
+}
 
-        pw.<span class="hljs-built_in">close</span>();
+pw.<span class="hljs-built_in">close</span>();
 </code></pre><p>Entry written on 8/10/2022</p>

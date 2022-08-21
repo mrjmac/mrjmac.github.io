@@ -5,17 +5,17 @@
 <p>This problem is classic and my explanation and writeup can never do the genius of the algorithm justice. Please try to solve it <a href="https://cses.fi/problemset/task/2165">here</a> and read <a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi#Recursive_solution">this</a> writeup when you&#39;re done.</p>
 <p>Here&#39;s the code for the recursive method in this problem:</p>
 <pre><code>public static void hanoi(<span class="hljs-built_in">int</span> <span class="hljs-built_in">n</span>, <span class="hljs-built_in">int</span> f, <span class="hljs-built_in">int</span> <span class="hljs-built_in">t</span>, <span class="hljs-built_in">int</span> a, PrintWriter pw)
+{
+    <span class="hljs-built_in">if</span> (<span class="hljs-built_in">n</span> &gt; <span class="hljs-number">0</span>)
     {
-        <span class="hljs-built_in">if</span> (<span class="hljs-built_in">n</span> &gt; <span class="hljs-number">0</span>)
-        {
-            hanoi(<span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>, f, a, <span class="hljs-built_in">t</span>, pw);
-            pw.println(f + <span class="hljs-string">" "</span> + <span class="hljs-built_in">t</span>);
-            hanoi(<span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>, a, <span class="hljs-built_in">t</span>, f, pw);
-        }
+        hanoi(<span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>, f, a, <span class="hljs-built_in">t</span>, pw);
+        pw.println(f + <span class="hljs-string">" "</span> + <span class="hljs-built_in">t</span>);
+        hanoi(<span class="hljs-built_in">n</span> - <span class="hljs-number">1</span>, a, <span class="hljs-built_in">t</span>, f, pw);
     }
+}
 </code></pre><p>Here&#39;s the driver code for this problem:</p>
 <pre><code> <span class="hljs-keyword">int</span> n = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
-        pw.<span class="hljs-built_in">println</span>((<span class="hljs-keyword">int</span>)Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, n) - <span class="hljs-number">1</span>);
-        hanoi(n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, pw);
-        pw.<span class="hljs-built_in">close</span>();
+pw.<span class="hljs-built_in">println</span>((<span class="hljs-keyword">int</span>)Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, n) - <span class="hljs-number">1</span>);
+hanoi(n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, pw);
+pw.<span class="hljs-built_in">close</span>();
 </code></pre><p>Entry written on 8/9/2022</p>
