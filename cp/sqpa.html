@@ -1,0 +1,13 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="square-pasture">Square Pasture</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/squarePasture.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=663">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is very simple and is pure math. We first need to find the x and y coordinates of the most extreme points given. This is the minimum values for the left and bottom points and the maximum values for the top and right points. Now we have all we need to make the smallest rectangular pasture, however the problem asks for a square pasture. To make a square pasture all we have to do is find the largest side of the rectangle and return that squared. Here&#39;s the code for this problem:</p>
+<pre><code>int low = min(<span class="hljs-name">x1</span>, x3)<span class="hljs-comment">;</span>
+int low2 = min(<span class="hljs-name">y1</span>, y3)<span class="hljs-comment">;</span>
+int high = max(<span class="hljs-name">x2</span>, x4)<span class="hljs-comment">;</span>
+int high2 = max(<span class="hljs-name">y2</span>, y4)<span class="hljs-comment">;</span>
+
+cout &lt;&lt; max(<span class="hljs-name">high</span> - low, high2 - low2) * max(<span class="hljs-name">high</span> - low, high2 - low2) &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 8/21/2022</p>

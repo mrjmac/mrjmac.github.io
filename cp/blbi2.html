@@ -1,0 +1,33 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="blocked-billboard-2">Blocked Billboard 2</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/blockedBillboard2.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=783">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is very simple but really annoying. My first thought was to cover the area of the lawnmower billboard minus the area of the intersection between the lawnmower billboard and the feed billboard. However, this doesn&#39;t account for the case where the lawnmower billboard has one side only partially covered by the feed billboard. Instead, I had to manually check and output the math for all 6 base cases. These cases are: the lawnmower billboard is completely covered, has it&#39;s left side covered, it&#39;s right side covered, it&#39;s top side covered, it&#39;s bottom side covered, and it&#39;s diagonal covered. Here&#39;s the code for this problem</p>
+<pre><code><span class="hljs-built_in">cin</span> &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2 &gt;&gt; x3 &gt;&gt; y3 &gt;&gt; x4 &gt;&gt; y4;
+
+<span class="hljs-keyword">if</span> (x4 &gt;= x2 &amp;&amp; x3 &lt;= x1 &amp;&amp; y4 &gt;= y2 &amp;&amp; y3 &lt;= y1)
+{
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-number">0</span>;
+} 
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x3 &lt; x2 &amp;&amp; x4 &gt;= x2 &amp;&amp; y4 &gt;= y2 &amp;&amp; y3 &lt;= x1) 
+{ 
+    <span class="hljs-built_in">cout</span> &lt;&lt; (x3 - x1) * (y2 - y1);
+} 
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x3 &lt;= x1 &amp;&amp; y3 &lt;= y1 &amp;&amp; y4 &gt; y1 &amp;&amp; x4 &gt;= x2) 
+{
+    <span class="hljs-built_in">cout</span> &lt;&lt; (x2 - x1) * (y2 - y4);
+} 
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (y3 &lt; y2 &amp;&amp; x3 &lt;= x1 &amp;&amp; y4 &gt;= y2 &amp;&amp; x4 &gt;= x2) 
+{
+    <span class="hljs-built_in">cout</span> &lt;&lt; (x2 - x1) * (y3 - y1);
+} 
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x4 &gt; x1 &amp;&amp; x3 &lt;= x1 &amp;&amp; y4 &gt;= y2 &amp;&amp; y3 &lt;= y1) 
+{
+    <span class="hljs-built_in">cout</span> &lt;&lt; (x2 - x4) * (y2 - y1);
+} 
+<span class="hljs-keyword">else</span> 
+{
+    <span class="hljs-built_in">cout</span> &lt;&lt; (x2 - x1) * (y2 - y1);
+}
+</code></pre><p>Entry written on 8/21/2022</p>

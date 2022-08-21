@@ -1,0 +1,39 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="blocked-billboard-2">White Sheet</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CodeForces/whiteSheet.cpp">GitHub link</a></p>
+<p>This is an introductory codeforces problem that I found through usaco.guide.</p>
+<p>The problem is rather complicated and easier to understand with visuals like all 2D geometry problems, so <a href="https://codeforces.com/contest/1216/problem/C">here</a>&#39;s a link to it so you can read it.</p>
+<p>This problem is fairly trivial, however it&#39;s a little harder than one would think after a first readthrough. My initial idea was to simply calculate the overlap between the white sheet and both of the black sheets and output if the area of the white sheet minus that overlap was greater than 0. However, this didn&#39;t work as two black sheets could cover up the same area which could cause some test cases to return that the white sheet was covered up even if it wasn&#39;t. To fix this, all I had to do was find the area of the overlap between the two black sheets and add this onto the original value I had. In order to ensure that the overlap of the black sheets are over the white sheet, I added the white sheet as variable when I checked the overlap of the two black sheets. Here&#39;s the code for this problem</p>
+<pre><code><span class="hljs-keyword">struct</span> board {
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> x1, x2, y1, y2;
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> area()
+    {
+        <span class="hljs-built_in">return</span> (x2 - x1) * (y2 - y1);
+    }
+};
+
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> overlap(board a, board b)
+{
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> xO = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(a.x2, b.x2) - <span class="hljs-built_in">max</span>(a.x1, b.x1), (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> yO = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(a.y2, b.y2) - <span class="hljs-built_in">max</span>(a.y1, b.y1), (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">return</span> xO * yO;
+}
+
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> overlapv2(board a, board b, board c)
+{
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> xO = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(<span class="hljs-built_in">min</span>(a.x2, b.x2), c.x2) - <span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>(a.x1, b.x1), c.x1), (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> yO = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(<span class="hljs-built_in">min</span>(a.y2, b.y2), c.y2) - <span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>(a.y1, b.y1), c.y1), (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">return</span> xO * yO;
+}
+
+
+
+<span class="hljs-built_in">if</span> ((sheet.area() - (overlap(sheet, bb1) + overlap(sheet, bb2)) + overlapv2(sheet, bb1, bb2) == <span class="hljs-number">0</span>))
+{
+    cout &lt;&lt; <span class="hljs-string">"NO"</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+<span class="hljs-built_in">else</span>
+{
+    cout &lt;&lt; <span class="hljs-string">"YES"</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 8/21/2022</p>
