@@ -1,0 +1,58 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="100-prisoners">100 Prisoners</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/other/100prisoners.cpp">GitHub link</a></p>
+<p>This is a really neat math problem that I decided to implement after reading about.</p>
+<p>The problem goes like this: There are 100 prisoners in a prison. The warden has decided that he is going to play a game with them: They are each given a number from 1 to 100. The warden fills a room with 100 boxes also numbered 1 to 100 with a slip or paper that has a number 1 to 100 on it. The slips of paper are not necessarily in the box that shares their number. Every prisoner must go into the room and open 50 boxes. If even one prisoner does not find his number, they all will die. However, if all of them find their numbers then they will all live. The prisoners are not allowed to communicate with each other after the game starts, however they can strategize before the first one enters.</p>
+<p>At first it seems that the prisoners will almost certainly die. Each prisoner has a 50% chance of finding their own number as they can only open 50% of the boxes. As there are 100 prisoners, the odds of each achieving this is .5 ^ 100, which works out to 0.8 * 10^-30. However, using a clever trick the odds can be increased to ~31%.  </p>
+<p>The idea is very simple and makes complete sense the more you think about it--each prisoner should start at the box with their number and then open the box with the number of the slip that was in the previous box. No matter how the slips were mixed initially, there will exist a unique loop that points back to any prisoners number. The way to get on this loop is to start at the end of it, with your own number. However, the prisoners are far from home free yet. If any loop exists of length greater than 50, all prisoners on that loop will die. This strategy will either result in widespread success or failure. It happens to work out that the odds of a loop of 100 comes out to 1/100 and the odds of a loop of 99 comes out to 1/99 and so on. This is because the probability of a loop of a given length existing is equal to (number of unique loops of length x/total number of loops). The number of unique loops of length x is always equal to 100!/x, and the total number of loops is always equal to 100!. This causes the odds of a loop of length x to come out to 1/x. The probability of any loop from length 1/100 -&gt; 1/51 existing comes down to 69%, leaving a survival rate of 31%. In my simulation of this, I found a 35% survival rate. Here&#39;s my code for this problem:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">simulate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[])</span>
+</span>{
+    <span class="hljs-keyword">int</span> total = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++)
+    {
+        <span class="hljs-keyword">int</span> pos = arr[i];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">50</span>; j++)
+        {
+            <span class="hljs-keyword">if</span> (arr[pos] == i)
+            {
+                total += <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">break</span>;
+            }
+            pos = arr[pos];
+        }
+
+    }
+    <span class="hljs-keyword">if</span> (total &lt; <span class="hljs-number">100</span>)
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">int</span> a[<span class="hljs-number">101</span>];
+    <span class="hljs-keyword">int</span> totalTrue = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> totalFalse = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++)
+    {
+        a[i] = i;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++)
+    {
+        random_shuffle(begin(a), end(a));
+        <span class="hljs-keyword">if</span> (simulate(a))
+        {
+            totalTrue += <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            totalFalse += <span class="hljs-number">1</span>;
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; totalTrue / (<span class="hljs-keyword">double</span>)(totalFalse + totalTrue) &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 8/21/2022</p>
