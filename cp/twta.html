@@ -1,0 +1,48 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="two-tables">Two Tables</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CodeForces/twoTables.cpp">GitHub link</a></p>
+<p>This is an introductory codeforces problem that I found through usaco.guide.</p>
+<p>This problem is rather complicated and easier to understand with visuals like all 2D geometry problems, so <a href="https://codeforces.com/problemset/problem/1555/B">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is fairly simple and just comes down to understanding the situation. We can either put the second table on the top, bottom, left, or right side. It&#39;s pretty easy to figure out the distance that the first table needs to move for the second table to fit for all of these cases. All we have to do in in this problem is check if the second table will fit in at least one scenario. If it does, we just have to check which scenario requires the least movement. Here&#39;s the code for this problem</p>
+<pre><code>for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">n</span>; i++)
+{
+    <span class="hljs-built_in">int</span> tw, th, <span class="hljs-symbol">x1</span>, <span class="hljs-symbol">y1</span>, <span class="hljs-symbol">x2</span>, <span class="hljs-symbol">y2</span>, <span class="hljs-symbol">w2</span>, <span class="hljs-symbol">h2</span>;
+    cin &gt;&gt; tw &gt;&gt; th &gt;&gt; <span class="hljs-symbol">x1</span> &gt;&gt; <span class="hljs-symbol">y1</span> &gt;&gt; <span class="hljs-symbol">x2</span> &gt;&gt; <span class="hljs-symbol">y2</span> &gt;&gt; <span class="hljs-symbol">w2</span> &gt;&gt; <span class="hljs-symbol">h2</span>;
+
+    <span class="hljs-built_in">int</span> <span class="hljs-symbol">w1</span> = <span class="hljs-symbol">x2</span> - <span class="hljs-symbol">x1</span>;
+    <span class="hljs-built_in">int</span> <span class="hljs-symbol">h1</span> = <span class="hljs-symbol">y2</span> - <span class="hljs-symbol">y1</span>;
+
+    <span class="hljs-built_in">int</span> leftP = <span class="hljs-symbol">w2</span>;
+    <span class="hljs-built_in">int</span> rightP = tw - <span class="hljs-symbol">w2</span>;
+    <span class="hljs-built_in">int</span> topP = th - <span class="hljs-symbol">h2</span>;
+    <span class="hljs-built_in">int</span> bottomP = <span class="hljs-symbol">h2</span>;
+
+    <span class="hljs-built_in">int</span> <span class="hljs-built_in">left</span> = <span class="hljs-built_in">max</span>(leftP - <span class="hljs-symbol">x1</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-built_in">int</span> <span class="hljs-built_in">right</span> = <span class="hljs-built_in">max</span>(<span class="hljs-symbol">x2</span> - rightP, <span class="hljs-number">0</span>);
+    <span class="hljs-built_in">int</span> top = <span class="hljs-built_in">max</span>(<span class="hljs-symbol">y2</span> - topP, <span class="hljs-number">0</span>);
+    <span class="hljs-built_in">int</span> bottom = <span class="hljs-built_in">max</span>(bottomP - <span class="hljs-symbol">y1</span>, <span class="hljs-number">0</span>);
+
+    <span class="hljs-built_in">if</span> (<span class="hljs-symbol">w1</span> + <span class="hljs-symbol">w2</span> &gt; tw)
+    {
+        <span class="hljs-built_in">left</span> = INT32_MAX;
+        <span class="hljs-built_in">right</span> = INT32_MAX;
+    }
+
+    <span class="hljs-built_in">if</span> (<span class="hljs-symbol">h1</span> + <span class="hljs-symbol">h2</span> &gt; th)
+    {
+        top = INT32_MAX;
+        bottom = INT32_MAX;
+    }
+
+    <span class="hljs-built_in">int</span> ans = <span class="hljs-built_in">min</span>(<span class="hljs-built_in">min</span>(<span class="hljs-built_in">left</span>, <span class="hljs-built_in">right</span>), <span class="hljs-built_in">min</span>(top, bottom));
+
+    <span class="hljs-built_in">if</span> (ans == INT32_MAX)
+    {
+        cout &lt;&lt; -<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+    else
+    {
+        cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+}
+</code></pre><p>Entry written on 8/24/2022</p>

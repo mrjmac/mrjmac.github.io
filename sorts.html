@@ -10,18 +10,18 @@
 <li>The world would be a better place if more government agencies and financial institutions used this to sort their databases.</li>
 <li>The main code loop: </li>
 <li><pre><code><span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;
-     <span class="hljs-built_in">while</span> (i &lt; numbers.<span class="hljs-built_in">size</span>())
-     {
-         <span class="hljs-built_in">if</span> (numbers.<span class="hljs-built_in">get</span>(i) &lt; numbers.<span class="hljs-built_in">get</span>(i - <span class="hljs-number">1</span>))
-         {
-             numbers.<span class="hljs-built_in">remove</span>(i);
+<span class="hljs-built_in">while</span> (i &lt; numbers.<span class="hljs-built_in">size</span>())
+{
+    <span class="hljs-built_in">if</span> (numbers.<span class="hljs-built_in">get</span>(i) &lt; numbers.<span class="hljs-built_in">get</span>(i - <span class="hljs-number">1</span>))
+    {
+        numbers.<span class="hljs-built_in">remove</span>(i);
 
-         }
-         <span class="hljs-built_in">else</span>
-         {
-             i++;
-         }
-     }
+    }
+    <span class="hljs-built_in">else</span>
+    {
+        i++;
+    }
+}
 </code></pre></li>
 </ul>
 <h2 id="-sleepsort-https-github-com-mrjmac-sorts-blob-main-sleepsort-py-"><a href="https://github.com/mrjmac/sorts/blob/main/sleepsort.py">sleepsort</a></h2>
@@ -45,21 +45,21 @@
 <li>O(n^2) in all cases as there are two for loops.</li>
 <li>The main code loop:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i++)
-     {
-         <span class="hljs-comment">//assume that current item is lowest</span>
-         <span class="hljs-built_in">int</span> minInd = i;
-         <span class="hljs-comment">//verify this information</span>
-         <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = i + <span class="hljs-number">1</span>; j &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>(); j++)
-         {
-             <span class="hljs-comment">//set the real min index if we have to</span>
-             <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(minInd) &gt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(j))
-             {
-                 minInd = j;
-             }
-         }
-         <span class="hljs-comment">//swap the current item with the lowest</span>
-         <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(minInd, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(i, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(minInd)));
-     }
+{
+    <span class="hljs-comment">//assume that current item is lowest</span>
+    <span class="hljs-built_in">int</span> minInd = i;
+    <span class="hljs-comment">//verify this information</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = i + <span class="hljs-number">1</span>; j &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>(); j++)
+    {
+        <span class="hljs-comment">//set the real min index if we have to</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(minInd) &gt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(j))
+        {
+            minInd = j;
+        }
+    }
+    <span class="hljs-comment">//swap the current item with the lowest</span>
+    <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(minInd, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(i, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(minInd)));
+}
 </code></pre></li>
 </ul>
 <h2 id="-bubblesort-https-github-com-mrjmac-sorts-blob-main-bubblesort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/bubblesort.java">bubblesort</a></h2>
@@ -71,16 +71,16 @@
 <li>As there are two for loops, the time complexity here on the average and worst cases are O(n^2). However, if code is written to terminate the process once the Array is sorted, this method is O(n) on it&#39;s best case.</li>
 <li>The main code loop:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i++)
-     {
-         <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> n = <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span> - i; n++)
-         {
-             <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(n) &gt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(n+<span class="hljs-number">1</span>))
-             {
-                 <span class="hljs-comment">//swap nums</span>
-                 <span class="hljs-built_in">sort</span> = swap(<span class="hljs-built_in">sort</span>, n);
-             }
-         }
-     }
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> n = <span class="hljs-number">0</span>; n &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span> - i; n++)
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(n) &gt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(n+<span class="hljs-number">1</span>))
+        {
+            <span class="hljs-comment">//swap nums</span>
+            <span class="hljs-built_in">sort</span> = swap(<span class="hljs-built_in">sort</span>, n);
+        }
+    }
+}
 </code></pre></li>
 </ul>
 <h2 id="-insertionsort-https-github-com-mrjmac-sorts-blob-main-insertionsort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/insertionsort.java">insertionsort</a></h2>
@@ -90,16 +90,16 @@
 <li>Same time complexity as bubble.</li>
 <li>The main code loop:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>(); i++)
-     {
-         <span class="hljs-built_in">int</span> curr = <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(i);
-         <span class="hljs-built_in">int</span> idx = i - <span class="hljs-number">1</span>;
-         <span class="hljs-keyword">while</span> (idx &gt;= <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(idx) &gt; curr)
-         {
-             <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(idx + <span class="hljs-number">1</span>, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(idx));
-             idx -= <span class="hljs-number">1</span>;
-         }
-         <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(idx + <span class="hljs-number">1</span>, curr);
-     }
+{
+    <span class="hljs-built_in">int</span> curr = <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(i);
+    <span class="hljs-built_in">int</span> idx = i - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (idx &gt;= <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(idx) &gt; curr)
+    {
+        <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(idx + <span class="hljs-number">1</span>, <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">get</span>(idx));
+        idx -= <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">set</span>(idx + <span class="hljs-number">1</span>, curr);
+}
 </code></pre></li>
 </ul>
 <h2 id="-mergesort-https-github-com-mrjmac-sorts-blob-main-mergesort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/mergesort.java">mergesort</a></h2>
@@ -108,67 +108,67 @@
 <li>Can be hard to grasp at first, but pretty simple once you think about it a bit.</li>
 <li>Splits the array into two evenly sized arrays repeatedly until the size of the size of the array is one. Once it is, we begin to merge the arrays together. The code for that can be seen here:</li>
 <li><pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ArrayList&lt;Integer&gt; recursiveMergesort(ArrayList&lt;Integer&gt; a)
- {
+{
      <span class="hljs-keyword">if</span> (a.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)
-     {
-         <span class="hljs-keyword">return</span> a;
-     }
+    {
+        <span class="hljs-keyword">return</span> a;
+    }
 
-     <span class="hljs-built_in">int</span> mid = (a.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
+    <span class="hljs-built_in">int</span> mid = (a.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
 
-     ArrayList&lt;Integer&gt; one = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
-     ArrayList&lt;Integer&gt; two = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    ArrayList&lt;Integer&gt; one = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    ArrayList&lt;Integer&gt; two = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
 
-     <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt;= mid; i++)
-     {
-         one.<span class="hljs-built_in">add</span>(a.<span class="hljs-built_in">get</span>(i));
-     }
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt;= mid; i++)
+    {
+        one.<span class="hljs-built_in">add</span>(a.<span class="hljs-built_in">get</span>(i));
+    }
 
-     <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = mid + <span class="hljs-number">1</span>; i &lt; a.<span class="hljs-built_in">size</span>(); i++)
-     {
-         two.<span class="hljs-built_in">add</span>(a.<span class="hljs-built_in">get</span>(i));
-     }
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = mid + <span class="hljs-number">1</span>; i &lt; a.<span class="hljs-built_in">size</span>(); i++)
+    {
+        two.<span class="hljs-built_in">add</span>(a.<span class="hljs-built_in">get</span>(i));
+    }
 
-     one = recursiveMergesort(one);
-     two = recursiveMergesort(two);
+    one = recursiveMergesort(one);
+    two = recursiveMergesort(two);
 
-     <span class="hljs-keyword">return</span> merge(one, two);
- }
+    <span class="hljs-keyword">return</span> merge(one, two);
+}
 </code></pre></li>
 <li>As the compiler gets to higher calls of the recursiveMergesort function in the stack, the arrays are no longer one element big. However, the merge method is written in order to isolate the smallest values in the arrays first. </li>
 <li>Here is the code for the merge function:</li>
 <li><pre><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ArrayList&lt;Integer&gt; <span class="hljs-title">merge</span>(<span class="hljs-params">ArrayList&lt;Integer&gt; a, ArrayList&lt;Integer&gt; b</span>)
- </span>{
-     ArrayList&lt;Integer&gt; c = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();
+</span>{
+    ArrayList&lt;Integer&gt; c = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();
 
-     <span class="hljs-keyword">while</span> (a.size() &gt; <span class="hljs-number">0</span> &amp;&amp; b.size() &gt; <span class="hljs-number">0</span>)
-     {
-         <span class="hljs-keyword">if</span> (a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>) &gt; b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>))
-         {
-             c.<span class="hljs-keyword">add</span>(b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
-             b.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
-         }
-         <span class="hljs-keyword">else</span>
-         {
-             c.<span class="hljs-keyword">add</span>(a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
-             a.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
-         }
-     }
+    <span class="hljs-keyword">while</span> (a.size() &gt; <span class="hljs-number">0</span> &amp;&amp; b.size() &gt; <span class="hljs-number">0</span>)
+    {
+        <span class="hljs-keyword">if</span> (a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>) &gt; b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>))
+        {
+            c.<span class="hljs-keyword">add</span>(b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+            b.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            c.<span class="hljs-keyword">add</span>(a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+            a.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
+        }
+    }
 
-     <span class="hljs-keyword">while</span>(a.size() &gt; <span class="hljs-number">0</span>)
-     {
-         c.<span class="hljs-keyword">add</span>(a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
-         a.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
-     }
+    <span class="hljs-keyword">while</span>(a.size() &gt; <span class="hljs-number">0</span>)
+    {
+        c.<span class="hljs-keyword">add</span>(a.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+        a.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
+    }
 
-     <span class="hljs-keyword">while</span>(b.size() &gt; <span class="hljs-number">0</span>)
-     {
-         c.<span class="hljs-keyword">add</span>(b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
-         b.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
-     }
+    <span class="hljs-keyword">while</span>(b.size() &gt; <span class="hljs-number">0</span>)
+    {
+        c.<span class="hljs-keyword">add</span>(b.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+        b.<span class="hljs-keyword">remove</span>(<span class="hljs-number">0</span>);
+    }
 
-     <span class="hljs-keyword">return</span> c;
- }
+    <span class="hljs-keyword">return</span> c;
+}
 </code></pre></li>
 <li>The time complexity of this sort is O(n * log n) in all cases.</li>
 </ul>
@@ -178,25 +178,25 @@
 <li>Sorts numbers out of place, so two arrays are needed.</li>
 <li>First, you count the number of times that each unique number in the array appears. In order to be able to do this, you have to know the maximum value in the array. The code for this can be seen here:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-keyword">sort</span>.length - <span class="hljs-number">1</span>; i++)
-     {
-         <span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[i]] += <span class="hljs-number">1</span>;
-     }
+{
+    <span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[i]] += <span class="hljs-number">1</span>;
+}
 </code></pre></li>
 <li>Next, you find the prefix sum of the array from the previous step.</li>
 <li>If you think about it, this makes complete sense as the count of each unique number represents how many spaces they fill. In order for a two to fit in the array, it must consider how many spaces the ones take up.</li>
 <li>The code for this process can be seen here:</li>
 <li><pre><code>for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">1</span><span class="hljs-comment">; j &lt;= max; j++)</span>
-     {
-         <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j] </span>+= <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j </span>- <span class="hljs-number">1</span>]<span class="hljs-comment">;</span>
-     }
+{
+    <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j] </span>+= <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j </span>- <span class="hljs-number">1</span>]<span class="hljs-comment">;</span>
+}
 </code></pre></li>
 <li>Finally, you loop through the original array backwards and check the index of the number in order to find where it belongs. You subtract 1 from this number as arrays start at 0 and not 1. You place the number in the spot that is returned.</li>
 <li>The code for this can be seen here:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-keyword">sort</span>.length - <span class="hljs-number">1</span>; k &gt;= <span class="hljs-number">0</span>; k--)
-     {
-         <span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[k]] -= <span class="hljs-number">1</span>;
-         output[<span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[k]]] = <span class="hljs-keyword">sort</span>[k];
-     }
+{
+    <span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[k]] -= <span class="hljs-number">1</span>;
+    output[<span class="hljs-keyword">count</span>[<span class="hljs-keyword">sort</span>[k]]] = <span class="hljs-keyword">sort</span>[k];
+}
 </code></pre></li>
 <li>The time complexity of this is O(n + k), where k is equal to the range of values in the array. This is true for all cases.</li>
 </ul>
@@ -208,36 +208,36 @@
 <li>Picks a number and moves all numbers around that number so that the higher numbers are after it and the lower numbers are before it.</li>
 <li>The code for that can be seen here: </li>
 <li><pre><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span>
-    </span>{
-        <span class="hljs-keyword">int</span> pivot = arr[high];
-        <span class="hljs-keyword">int</span> greater = low - <span class="hljs-number">1</span>;
+</span>{
+    <span class="hljs-keyword">int</span> pivot = arr[high];
+    <span class="hljs-keyword">int</span> greater = low - <span class="hljs-number">1</span>;
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = low; i &lt; high; i++)
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = low; i &lt; high; i++)
+    {
+        <span class="hljs-keyword">if</span> (arr[i] &lt;= pivot)
         {
-            <span class="hljs-keyword">if</span> (arr[i] &lt;= pivot)
-            {
-                greater += <span class="hljs-number">1</span>;
-                swap(arr, greater, i);
-            }
+            greater += <span class="hljs-number">1</span>;
+            swap(arr, greater, i);
         }
-        swap(arr, greater + <span class="hljs-number">1</span>, high);
-
-
-        <span class="hljs-keyword">return</span> greater + <span class="hljs-number">1</span>;
     }
+    swap(arr, greater + <span class="hljs-number">1</span>, high);
+
+
+    <span class="hljs-keyword">return</span> greater + <span class="hljs-number">1</span>;
+}
 </code></pre></li>
 <li>Once this is done, the same is recursively called at the end of our driver function to pivot again around the values from 0 to our first pivot and our first pivot to the end.</li>
 <li>Here&#39;s the driver code:</li>
 <li>
 <pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-keyword">sort</span>(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)
+{
+    <span class="hljs-keyword">if</span> (low &lt; high)
     {
-        <span class="hljs-keyword">if</span> (low &lt; high)
-        {
-            <span class="hljs-keyword">int</span> pivot = partition(arr, low, high);
-            <span class="hljs-keyword">sort</span>(arr, low, pivot - <span class="hljs-number">1</span>);
-            <span class="hljs-keyword">sort</span>(arr, pivot + <span class="hljs-number">1</span>, high);
-        }
+        <span class="hljs-keyword">int</span> pivot = partition(arr, low, high);
+        <span class="hljs-keyword">sort</span>(arr, low, pivot - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">sort</span>(arr, pivot + <span class="hljs-number">1</span>, high);
     }
+}
 </code></pre></li>
 <li>The time complexity of this sort is O(n^2) worse case and O(n* log n) in the average and best case.</li>
 </ul>
@@ -248,14 +248,14 @@
 <li>Here&#39;s the code for this sort:</li>
 <li>
 <pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-built_in">sort</span>(<span class="hljs-built_in">int</span>[] arr, <span class="hljs-built_in">int</span> <span class="hljs-built_in">size</span>)
+{
+    <span class="hljs-built_in">int</span> <span class="hljs-built_in">max</span> = getMax(arr);
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; <span class="hljs-built_in">max</span> / i &gt; <span class="hljs-number">0</span>; i *= <span class="hljs-number">10</span>)
     {
-        <span class="hljs-built_in">int</span> <span class="hljs-built_in">max</span> = getMax(arr);
-        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; <span class="hljs-built_in">max</span> / i &gt; <span class="hljs-number">0</span>; i *= <span class="hljs-number">10</span>)
-        {
-            countingSort(arr, <span class="hljs-built_in">size</span>, i);
-        }
-
+        countingSort(arr, <span class="hljs-built_in">size</span>, i);
     }
+
+}
 </code></pre></li>
 <li>The time complexity of this sort is O(d(n+k)) where K is the greatest number in the digits spot and d is the number of digits. I&#39;m not certain about this, but I&#39;m pretty sure.</li>
 </ul>

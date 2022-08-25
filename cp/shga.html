@@ -1,0 +1,22 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="shell-game">Shell Game</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/shellGame.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=891">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is extremely trivial. The best case for the shell will always be equal to the shell that Bessie guessed the most. In order to figure out which shell this is, we just have to simulate the swapping of the shells and increment the shell that Bessie guesses. Then we just have to find the max value out of all 3 shells. Here&#39;s the code for this problem</p>
+<pre><code>vector&lt;int&gt; <span class="hljs-keyword">shells{0, </span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>}<span class="hljs-comment">;</span>
+vector&lt;int&gt; correct(<span class="hljs-number">3</span>)<span class="hljs-comment">;</span>
+
+for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; n; i++)</span>
+{
+    int a, <span class="hljs-keyword">b, </span>g<span class="hljs-comment">;</span>
+    cin &gt;&gt; a &gt;&gt; <span class="hljs-keyword">b </span>&gt;&gt; g<span class="hljs-comment">;</span>
+
+    a--, <span class="hljs-keyword">b--, </span>g--<span class="hljs-comment">;</span>
+
+    <span class="hljs-keyword">swap(shells[a], </span><span class="hljs-keyword">shells[b]);
+</span>    correct[<span class="hljs-keyword">shells[g]]++;
+</span>}
+
+cout &lt;&lt; max(max(correct[<span class="hljs-number">0</span>], correct[<span class="hljs-number">1</span>]), correct[<span class="hljs-number">2</span>]) &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 8/24/2022</p>
