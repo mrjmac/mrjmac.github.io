@@ -1,4 +1,4 @@
-<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}</style>
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
 <h1 id="sorts">Sorts</h1>
 <p>This page is filled with details and code on all <em>sorts</em> of sorting algorithms, some practical, some not so much.</p>
 <h2 id="-dropsort-https-github-com-mrjmac-sorts-blob-main-dropsort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/dropsort.java">dropsort</a></h2>
@@ -259,6 +259,23 @@
 </code></pre></li>
 <li>The time complexity of this sort is O(d(n+k)) where K is the greatest number in the digits spot and d is the number of digits. I&#39;m not certain about this, but I&#39;m pretty sure.</li>
 </ul>
+<h2 id="-bogosort-https-github-com-mrjmac-sorts-blob-main-bogosort-cpp-"><a href="https://github.com/mrjmac/sorts/blob/main/bogosort.cpp">bogosort</a></h2>
+<ul>
+<li>This should not have been invented.</li>
+<li>Randomly scrambles the elements in the array until they are sorted.</li>
+<li>Worst case time complexity never finishes as you can't guarantee that the array will ever scramble correctly.</li>
+<li>The main code loop:</li>
+<li><pre><code><span class="hljs-keyword">while</span>(!sorted)
+{
+  random_shuffle(<span class="hljs-keyword">begin</span>(bogo), <span class="hljs-keyword">end</span>(bogo));
+  <span class="hljs-keyword">if</span> (isSorted(bogo, size))
+  {
+      sorted = <span class="hljs-literal">true</span>;
+  }
+}
+</code></pre></li>
+</ul>
+
 
 
 
