@@ -1,1 +1,20 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="bovine-shuffle">Bovine Shuffle</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bovineShuffle.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=760">here</a>&#39;s a link so you can read it.</p>
+<p>This problem just involves simulating the shuffling of the cows backwards. In order to do this, we have to continually swap cows. However, whenever Farmer John originally swapped his cows, he did it in O(1) and each cow moved at the same time. However, we can only simulate this in O(n). This is a big problem as it can lead to numbers getting swapped twice. In order to fix this, I used a temporary array to store all the swaps and performed them all at the end of each shuffle. Here&#39;s the code for this problem:</p>
+<pre><code>for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 3; i++)</span>
+{
+    int temp[n]<span class="hljs-comment">;</span>
+    for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">0</span><span class="hljs-comment">; j &lt; n; j++)</span>
+    {
+        temp[<span class="hljs-keyword">j] </span>= tags[a[<span class="hljs-keyword">j] </span>- <span class="hljs-number">1</span>]<span class="hljs-comment">;</span>
+    }
+
+    for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">0</span><span class="hljs-comment">; j &lt; n; j++)</span>
+    {
+        tags[<span class="hljs-keyword">j] </span>= temp[<span class="hljs-keyword">j];
+</span>    }
+}
+</code></pre><p>Entry written on 8/28/2022</p>
