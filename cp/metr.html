@@ -1,0 +1,52 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="measuring-traffic">Measuring Traffic</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/measuringTraffic.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=917">here</a>&#39;s a link so you can read it.</p>
+<p>After reading the problem, I immediately realized that this is extremely intuitive to simulate. The easiest way to do this problem is to scan through the road and figure out how many cars can be on it. Then we can scan through backwards and see how many there were at the start. For segments of the road labeled none we just have to clip our range to be more specific. For segments of the road labeled on we just have to add n to our upper and lower bounds. Finally, for segments labeled off we just have to subtract n from our upper and lower bounds. When going through the list in reverse to find the starting number of people on the road we just have to reverse the on and off actions. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)
+{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"on"</span>)
+    {
+        <span class="hljs-keyword">small</span> -= <span class="hljs-keyword">end</span>[i];
+        <span class="hljs-keyword">large</span> -= start[i];
+        <span class="hljs-keyword">small</span> = max(<span class="hljs-number">0</span>, <span class="hljs-keyword">small</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"off"</span>)
+    {
+        <span class="hljs-keyword">small</span> += start[i];
+        <span class="hljs-keyword">large</span> += <span class="hljs-keyword">end</span>[i];
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"none"</span>)
+    {
+        <span class="hljs-keyword">small</span> = max(<span class="hljs-keyword">small</span>, start[i]);
+        <span class="hljs-keyword">large</span> = min(<span class="hljs-keyword">large</span>, <span class="hljs-keyword">end</span>[i]);
+    }
+    }
+
+cout &lt;&lt; <span class="hljs-keyword">small</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-keyword">large</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+
+<span class="hljs-keyword">large</span> = <span class="hljs-number">1</span>e9, <span class="hljs-keyword">small</span> = -<span class="hljs-keyword">large</span>;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"off"</span>)
+    {
+        <span class="hljs-keyword">small</span> -= <span class="hljs-keyword">end</span>[i];
+        <span class="hljs-keyword">large</span> -= start[i];
+        <span class="hljs-keyword">small</span> = max(<span class="hljs-number">0</span>, <span class="hljs-keyword">small</span>);
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"on"</span>)
+    {
+        <span class="hljs-keyword">small</span> += start[i];
+        <span class="hljs-keyword">large</span> += <span class="hljs-keyword">end</span>[i];
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">type</span>[i] == <span class="hljs-string">"none"</span>)
+    {
+        <span class="hljs-keyword">small</span> = max(<span class="hljs-keyword">small</span>, start[i]);
+        <span class="hljs-keyword">large</span> = min(<span class="hljs-keyword">large</span>, <span class="hljs-keyword">end</span>[i]);
+    }
+}
+
+cout &lt;&lt; <span class="hljs-keyword">small</span> &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-keyword">large</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+</code></pre><p>Entry written on 8/31/2022</p>
