@@ -1,1 +1,19 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="circular-barn">Circular Barn</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/circularBarn.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=616">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is another one that you can simulate very easily. The only slight issue is figuring out how to loop around if you have to go from door n to door 1. This is pretty easy though, as this can be solved for by finding (starting room + current room) % number of rooms. Here&#39;s the code for this problem:</p>
+<pre><code>int mindis = INT32_MAX<span class="hljs-comment">;</span>
+for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; n; i++)</span>
+{
+    int currdis = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+    int cows = totalcows<span class="hljs-comment">;</span>
+    for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">0</span><span class="hljs-comment">; j &lt; n; j++)</span>
+    {
+        cows -= rooms[(i + <span class="hljs-keyword">j) </span>% n]<span class="hljs-comment">;</span>
+        currdis += cows<span class="hljs-comment">;</span>
+    }
+    mindis = min(mindis, currdis)<span class="hljs-comment">;</span>
+}
+</code></pre><p>Entry written on 9/2/2022</p>
