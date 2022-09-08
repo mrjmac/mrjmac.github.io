@@ -1,0 +1,129 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="team-tic-tac-toe">Team Tic Tac Toe</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/teamTicTacToe.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=831">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is the definition of simple but tedious. All you have to do is brute force every possible winning combination with every possible letter and check if the real board mirrors them. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">checkSingle</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; b)</span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++)
+    {
+        <span class="hljs-keyword">if</span> (b[i][<span class="hljs-number">0</span>] == ch &amp;&amp; b[i][<span class="hljs-number">1</span>] == ch &amp;&amp; b[i][<span class="hljs-number">2</span>] == ch)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (b[<span class="hljs-number">0</span>][i] == ch &amp;&amp; b[<span class="hljs-number">1</span>][i] == ch &amp;&amp; b[<span class="hljs-number">2</span>][i] == ch)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (b[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] == ch &amp;&amp; b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] == ch &amp;&amp; b[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>] == ch)
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (b[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>] == ch &amp;&amp; b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] == ch &amp;&amp; b[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>] == ch)
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">doubleHelper</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch1, <span class="hljs-keyword">char</span> ch2, <span class="hljs-keyword">char</span> x, <span class="hljs-keyword">char</span> y, <span class="hljs-keyword">char</span> z)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (x == y &amp;&amp; x != z)
+    {
+        <span class="hljs-keyword">if</span> (x == ch1 &amp;&amp; z == ch2)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (x == ch2 &amp;&amp; z ==  ch1)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x == z &amp;&amp; x != y)
+    {
+        <span class="hljs-keyword">if</span> (x == ch1 &amp;&amp; y == ch2)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (x == ch2 &amp;&amp; y == ch1)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (y == z &amp;&amp; x != y)
+    {
+        <span class="hljs-keyword">if</span> (y == ch1 &amp;&amp; x == ch2)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (y == ch2 &amp;&amp; x == ch1)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">checkDoubleWins</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch1, <span class="hljs-keyword">char</span> ch2, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; b)</span>
+</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++)
+    {
+        <span class="hljs-keyword">if</span> (doubleHelper(ch1, ch2, b[i][<span class="hljs-number">0</span>], b[i][<span class="hljs-number">1</span>], b[i][<span class="hljs-number">2</span>]))
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (doubleHelper(ch1, ch2, b[<span class="hljs-number">0</span>][i], b[<span class="hljs-number">1</span>][i], b[<span class="hljs-number">2</span>][i]))
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (doubleHelper(ch1, ch2, b[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>], b[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]))
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (doubleHelper(ch1, ch2, b[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>], b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>], b[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>]))
+    {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"tttt.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"tttt.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> single = <span class="hljs-number">0</span>, doublewins = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; board(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; board[i];
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch = <span class="hljs-string">'A'</span>; ch &lt;= <span class="hljs-string">'Z'</span>; ch++)
+    {
+        single += checkSingle(ch, board);
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch1 = <span class="hljs-string">'A'</span>; ch1 &lt;= <span class="hljs-string">'Z'</span>; ch1++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch2 = ch1 + <span class="hljs-number">1</span>; ch2 &lt;= <span class="hljs-string">'Z'</span>; ch2++)
+        {
+            doublewins += checkDoubleWins(ch1, ch2, board);
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; single &lt;&lt; <span class="hljs-string">"\n"</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; doublewins &lt;&lt; <span class="hljs-string">"\n"</span>;
+
+}
+</code></pre><p>Entry written on 9/7/2022</p>

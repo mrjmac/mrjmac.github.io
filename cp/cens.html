@@ -1,0 +1,20 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="censoring">Censoring</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/censoring.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=526">here</a>&#39;s a link so you can read it.</p>
+<p>I actually had already done this exact problem for my Computer Science A class. While I had already used the fastest solution when I did the lab in that class, the most common solution that others in my class used was not up to speed. One might be tempted to do this problem by making the condition of a while loop <code>while (string.indexOf(censor) != -1)</code>, however this method is incredibly slow as indexOf is a slow function. Instead, it is much faster to build a new string and continually check the end of it for the string that needs to be censored. One issue that I had when implementing this is that .substr() was too slow for this problem. Instead, I had to use .resize(). Here&#39;s the code for this problem:</p>
+<pre><code>string ans<span class="hljs-comment">;</span>
+for (<span class="hljs-name">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; (int)s.size(); i++)</span>
+{
+    ans += s[i]<span class="hljs-comment">;</span>
+    if (<span class="hljs-name">ans</span>.size() &gt;= <span class="hljs-literal">t</span>.size())
+    {
+        if (<span class="hljs-name">ans</span>.substr(<span class="hljs-name">ans</span>.size() - <span class="hljs-literal">t</span>.size()) == <span class="hljs-literal">t</span>)
+        {
+            ans.resize(<span class="hljs-name">ans</span>.size() - <span class="hljs-literal">t</span>.size())<span class="hljs-comment">;</span>
+        }
+    }
+}
+cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 9/7/2022</p>

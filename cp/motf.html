@@ -1,0 +1,60 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="mowing-the-field">Mowing The Field</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/mowingTheField.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=593">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is a lot easier than it looks. At first I thought that the way to go about this would be do some math. However, it&#39;s actually pretty easy to simulate this. The max value that our answer can be is 1000 as Farmer John takes 10 steps maximum in a maximum of 100 actions. All that I had to do to solve this problem was to simulate the movement of Farmer John and mark the time that he visited each grass. Then if any piece of grass that he visited already had a value, the answer would be equal to the current time minus the previously marked time. Here&#39;s the code for this problem:</p>
+<pre><code>int main()
+{
+    cin.tie(<span class="hljs-number">0</span>)-&gt;<span class="hljs-keyword">sync_with_stdio(0);
+</span>    freopen(<span class="hljs-string">"mowing.in"</span>, <span class="hljs-string">"r"</span>, stdin)<span class="hljs-comment">;</span>
+    freopen(<span class="hljs-string">"mowing.out"</span>, <span class="hljs-string">"w"</span>, stdout)<span class="hljs-comment">;</span>
+
+    int currX = <span class="hljs-number">1000</span>, currY = <span class="hljs-number">1000</span>, time = <span class="hljs-number">0</span>, ans = <span class="hljs-number">1001</span><span class="hljs-comment">;</span>
+
+    int n<span class="hljs-comment">;</span>
+    cin &gt;&gt; n<span class="hljs-comment">;</span>
+
+    for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; n; i++)</span>
+    {
+        string <span class="hljs-keyword">dir;
+</span>        int numSteps, dx = <span class="hljs-number">0</span>, dy = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        cin &gt;&gt; <span class="hljs-keyword">dir </span>&gt;&gt; numSteps<span class="hljs-comment">;</span>
+
+        if (<span class="hljs-keyword">dir </span>== <span class="hljs-string">"N"</span>)
+        {
+            dy = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        }
+        else if (<span class="hljs-keyword">dir </span>== <span class="hljs-string">"S"</span>)
+        {
+            dy = -<span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        }
+        else if (<span class="hljs-keyword">dir </span>== <span class="hljs-string">"W"</span>)
+        {
+            dx = -<span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        }
+        else
+        {
+            dx = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        }
+
+        for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; numSteps; i++)</span>
+        {
+            currX += dx<span class="hljs-comment">;</span>
+            currY += dy<span class="hljs-comment">;</span>
+            time += <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+            if (field[currX][currY] &gt; <span class="hljs-number">0</span> &amp;&amp; time - field[currX][currY] &lt; ans)
+            {
+                ans = time - field[currX][currY]<span class="hljs-comment">;</span>
+            }
+            field[currX][currY] = time<span class="hljs-comment">;</span>
+        }
+    }
+
+    if (ans == <span class="hljs-number">1001</span>)
+    {
+        ans = -<span class="hljs-number">1</span><span class="hljs-comment">;</span>
+    }
+    cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+}
+</code></pre><p>Entry written on 9/7/2022</p>
