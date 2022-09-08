@@ -1,6 +1,7 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
 <h1 id="word-processor">Word Processor</h1>
-<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/wordProcessor.java">GitHub link</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/wordProcessor.java">GitHub link (Java)</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/wordProcessor.cpp">GitHub link (C++)</a></p>
 <p>This is an old usaco bronze problem that I found through usaco.guide.</p>
 <p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=987">here</a>&#39;s a link to it so you can read it.</p>
 <p>This problem is pretty simple and simply parsing through the input will result in an O(n) solution. All we have to do is keep track of our current letter count and if we are over the limit we move the next word to a new line. In order to avoid adding spaces to the end of a line, we have to make sure that the next word fits before we add one. However, this can cause of to go out of bounds on the final word. To prevent this, I added a short circuit or statement so that the compiler will never attempt to access an out of bounds index. Here&#39;s the code for this problem:</p>

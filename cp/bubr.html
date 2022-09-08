@@ -1,6 +1,7 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
 <h1 id="bucket-brigade">Bucket Brigade</h1>
-<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bucketBrigade.java">GitHub link</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bucketBrigade.java">GitHub link (Java)</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bucketBrigade.cpp">GitHub link (C++)</a></p>
 <p>This is an old usaco bronze problem that I found through usaco.guide.</p>
 <p>The problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=939">here</a>&#39;s a link to it so you can read it.</p>
 <p>This problem is rather daunting at first glance and one might assume that you have to use DFS to find the best path. However, this would make the problem way more complicated than necessary. The shortest travel distance for the cows will always be equal to the difference in x and y combined minus 1 (because the corner is one both the x and y) between the barn and the lake. If the rock is along this path, it only takes two extra cows to get around it(An extra to create an offset from the rock and go around it and one more to go back to the barn at the end. The solution that I opted for recorded the coordinate of all the objects and checking if the rock is in the way. Here&#39;s the code for this problem:</p>

@@ -1,6 +1,7 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
 <h1 id="tower-of-hanoi">Tower Of Hanoi</h1>
-<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/towerOfHanoi.java">GitHub link</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/towerOfHanoi.java">GitHub link (Java)</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/towerOfHanoi.cpp">GitHub link (C++)</a></p>
 <p>This is the thirteenth problem in the CSES problem set.</p>
 <p>This problem is classic and my explanation and writeup can never do the genius of the algorithm justice. Please try to solve it <a href="https://cses.fi/problemset/task/2165">here</a> and read <a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi#Recursive_solution">this</a> writeup when you&#39;re done.</p>
 <p>Here&#39;s the code for the recursive method in this problem:</p>
@@ -14,7 +15,7 @@
     }
 }
 </code></pre><p>Here&#39;s the driver code for this problem:</p>
-<pre><code> <span class="hljs-keyword">int</span> n = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
+<pre><code><span class="hljs-keyword">int</span> n = Integer.<span class="hljs-built_in">parseInt</span>(st.nextToken());
 pw.<span class="hljs-built_in">println</span>((<span class="hljs-keyword">int</span>)Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, n) - <span class="hljs-number">1</span>);
 hanoi(n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, pw);
 pw.<span class="hljs-built_in">close</span>();
