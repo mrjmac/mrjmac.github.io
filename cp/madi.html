@@ -1,0 +1,19 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="maximum-distance">Maximum Distance</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CodeForces/maximumDistance.cpp">GitHub link</a></p>
+<p>This is an old codeforces problem that I found through usaco.guide.</p>
+<p>This problem goes like this: given anywhere from 3 to 5000 integer points on a coordinate plane, find the square of the maximum Euclidean distance between any of the two given points.</p>
+<p>This problem was extremely easy. As n is at most 5000, we can easily use an O(n^2) loop and still stay within the time limit. In order to solve this problem, I just checked every possible answer and stored the greatest one. Here&#39;s the code for this problem:</p>
+<pre><code>for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; n; i++)</span>
+{
+    for (int <span class="hljs-keyword">j </span>= i + <span class="hljs-number">1</span><span class="hljs-comment">; j &lt; n; j++)</span>
+    {
+        int <span class="hljs-keyword">disx </span>= x[i] - x[<span class="hljs-keyword">j];
+</span>        int <span class="hljs-keyword">disy </span>= y[i] - y[<span class="hljs-keyword">j];
+</span>        int pos = <span class="hljs-keyword">disx </span>* <span class="hljs-keyword">disx </span>+ <span class="hljs-keyword">disy </span>* <span class="hljs-keyword">disy;
+</span>        ans = max(pos, ans)<span class="hljs-comment">;</span>
+    }
+}
+cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+</code></pre><p>Entry written on 9/9/2022</p>

@@ -1,0 +1,79 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="stuck-in-a-rut">Stuck in a Rut</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/stuckInARut.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=1061">here</a>&#39;s a link so you can read it.</p>
+<p>I didn&#39;t really know how to start this problem at first. While I knew that I couldn&#39;t simulate it as the movement of even one cow could potential take me out of bounds, I didn&#39;t know how else I could find collisions in order. After drawing all the example points given in the problem, I realized that each cow collision was dependent on one of the cows in question not being stopped before creating it&#39;s rut. This led me in the right path as I realized that I would have to first figure out if cows with lower x/y values collided before I could simulate ones with higher x/y values. When sorting the cows, I had to store what order they inputted in so that I could output the answer in the correct order. To figure out how to define a collision, I had to view the writeup on uasco.guide. After I did that, the rest of the problem was very easy. For every cow heading north in my sorted list I checked if it was on a collision course with every cow heading east. If the east cow was going to hit the north cow&#39;s rut and the north cow hadn&#39;t been stopped yet, I set that east cows stop value to the distance between the two. I did the same for the north cow, however I would break whenever I found a collision. This would stop the cow from colliding multiple times. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">int</span> main()
+{
+    cin.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n;
+    cin &gt;&gt; n;
+    vector&lt;<span class="hljs-keyword">array</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>&gt;&gt; north, east;
+
+    vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-built_in">stop</span>(n);
+    <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">stop</span>[i] = <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">string</span> dir;
+        <span class="hljs-keyword">int</span> x, y;
+        cin &gt;&gt; dir &gt;&gt; x &gt;&gt; y;
+
+        <span class="hljs-built_in">if</span> (dir == <span class="hljs-string">"N"</span>)
+        {
+            north.push_back({x, y, i});
+        }
+        <span class="hljs-built_in">else</span>
+        {
+            east.push_back({x, y, i});
+        }
+
+    }
+
+    sort(north.<span class="hljs-built_in">begin</span>(), north.<span class="hljs-built_in">end</span>());
+    sort(east.<span class="hljs-built_in">begin</span>(), east.<span class="hljs-built_in">end</span>(), [](<span class="hljs-keyword">auto</span> &amp;left, <span class="hljs-keyword">auto</span> &amp;right)
+    {
+        <span class="hljs-built_in">return</span> left[<span class="hljs-number">1</span>] &lt; right[<span class="hljs-number">1</span>];
+    });
+
+
+    <span class="hljs-built_in">for</span> (<span class="hljs-keyword">array</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>&gt; n : north)
+    {
+        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">array</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>&gt; e : east)
+        {
+            <span class="hljs-built_in">if</span> (n[<span class="hljs-number">0</span>] &gt; e[<span class="hljs-number">0</span>] &amp;&amp; n[<span class="hljs-number">1</span>] &lt; e[<span class="hljs-number">1</span>])
+            {
+                <span class="hljs-keyword">int</span> nd = e[<span class="hljs-number">1</span>] - n[<span class="hljs-number">1</span>];
+                <span class="hljs-keyword">int</span> ed = n[<span class="hljs-number">0</span>] - e[<span class="hljs-number">0</span>];
+                <span class="hljs-built_in">if</span> (nd &lt; ed &amp;&amp; <span class="hljs-built_in">stop</span>[e[<span class="hljs-number">2</span>]] == <span class="hljs-number">-1</span>)
+                {
+                    <span class="hljs-built_in">stop</span>[e[<span class="hljs-number">2</span>]] = ed;
+                }
+                <span class="hljs-built_in">else</span> <span class="hljs-built_in">if</span> (ed &lt; nd &amp;&amp; <span class="hljs-built_in">stop</span>[e[<span class="hljs-number">2</span>]] == <span class="hljs-number">-1</span>)
+                {
+                    <span class="hljs-built_in">stop</span>[n[<span class="hljs-number">2</span>]] = nd;
+                    <span class="hljs-built_in">break</span>;
+                }
+            }
+        }
+    }
+
+    <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">if</span> (<span class="hljs-built_in">stop</span>[i] == <span class="hljs-number">-1</span>)
+        {
+            cout &lt;&lt; <span class="hljs-string">"Infinity"</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+        }
+        <span class="hljs-built_in">else</span>
+        {
+            cout &lt;&lt; <span class="hljs-built_in">stop</span>[i] &lt;&lt; <span class="hljs-string">"\n"</span>;
+        }
+    }
+
+}
+</code></pre><p>Entry written on 9/9/2022</p>

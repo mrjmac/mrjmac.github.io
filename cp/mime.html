@@ -1,0 +1,53 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="milk-measurement">Milk Measurement</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/measuringMilk.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=761">here</a>&#39;s a link so you can read it.</p>
+<p>The basis of this problem is simple. Start on day 1, simulate the change in milk for each day, and check if there was a change in which cow is displayed from the previous day. To decrease look up times, I stored all of the cow milk amounts in a map. In order to get our days in order, we have to sort the input data. In order to do this easily I stored the input data in a vector filled with a tuple for each day. Once I  had all of our data sorted, I just had to loop through all the data and simulate the changes.  In order to do this efficiently, I used a pair to track the maximum milk value and the name of the cow that had the most milk. Here&#39;s the code for this problem:</p>
+<pre><code>vector&lt;tuple&lt;int, <span class="hljs-built_in">string</span>, int&gt;&gt; <span class="hljs-built_in">list</span>;
+map&lt;<span class="hljs-built_in">string</span>, int&gt; cows = {{<span class="hljs-string">"Bessie"</span>, <span class="hljs-number">7</span>}, {<span class="hljs-string">"Elsie"</span>, <span class="hljs-number">7</span>}, {<span class="hljs-string">"Mildred"</span>, <span class="hljs-number">7</span>}};
+pair&lt;int, <span class="hljs-built_in">string</span>&gt; winner = make_pair(<span class="hljs-number">7</span>, <span class="hljs-string">"BessieElsieMildred"</span>);
+
+<span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; n; i++)
+{
+    int <span class="hljs-built_in">day</span>, change;
+    <span class="hljs-built_in">string</span> <span class="hljs-built_in">name</span>;
+    cin &gt;&gt; <span class="hljs-built_in">day</span> &gt;&gt; <span class="hljs-built_in">name</span> &gt;&gt; change;
+    <span class="hljs-built_in">list</span>.push_back(make_tuple(<span class="hljs-built_in">day</span>, <span class="hljs-built_in">name</span>, change));
+}
+
+
+sort(<span class="hljs-built_in">list</span>.begin(), <span class="hljs-built_in">list</span>.<span class="hljs-keyword">end</span>());
+
+<span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; n; i++)
+{
+    <span class="hljs-built_in">string</span> <span class="hljs-built_in">name</span> = <span class="hljs-keyword">get</span>&lt;<span class="hljs-number">1</span>&gt;(<span class="hljs-built_in">list</span>[i]);
+    int change = <span class="hljs-keyword">get</span>&lt;<span class="hljs-number">2</span>&gt;(<span class="hljs-built_in">list</span>[i]);
+    cows[<span class="hljs-built_in">name</span>] += change;
+
+    pair&lt;int, <span class="hljs-built_in">string</span>&gt; old = make_pair(winner.<span class="hljs-keyword">first</span>, winner.<span class="hljs-keyword">second</span>);
+
+    winner.<span class="hljs-keyword">second</span> = <span class="hljs-string">""</span>;
+    winner.<span class="hljs-keyword">first</span> = max({cows[<span class="hljs-string">"Bessie"</span>], cows[<span class="hljs-string">"Mildred"</span>], cows[<span class="hljs-string">"Elsie"</span>]});
+
+    <span class="hljs-keyword">if</span> (cows[<span class="hljs-string">"Bessie"</span>] == winner.<span class="hljs-keyword">first</span>)
+    {
+        winner.<span class="hljs-keyword">second</span> += <span class="hljs-string">"Bessie"</span>;
+    }
+    <span class="hljs-keyword">if</span> (cows[<span class="hljs-string">"Mildred"</span>] == winner.<span class="hljs-keyword">first</span>)
+    {
+        winner.<span class="hljs-keyword">second</span> += <span class="hljs-string">"Mildred"</span>;
+    }
+    <span class="hljs-keyword">if</span> (cows[<span class="hljs-string">"Elsie"</span>] == winner.<span class="hljs-keyword">first</span>)
+    {
+        winner.<span class="hljs-keyword">second</span> += <span class="hljs-string">"Elsie"</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (old.<span class="hljs-keyword">second</span> != winner.<span class="hljs-keyword">second</span>)
+    {
+        ans += <span class="hljs-number">1</span>;
+    }
+}
+
+cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+</code></pre><p>Entry written on 9/9/2022</p>
