@@ -1,0 +1,71 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="cow-gymnastics">Cow Gymnastics</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/cowGymnastics.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=963">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is very simple. All that we have to do is check if every cow from 1 to n is greater than every cow from 1 to n. Checking if one cow is better than another is a pretty easy task that can be defined as checking if the position of cow A in the rankings is lower than the position of cow B in the rankings for ever practice. </p>
+<pre><code><span class="hljs-keyword">int</span> results[<span class="hljs-number">10</span>][<span class="hljs-number">20</span>];
+<span class="hljs-keyword">int</span> n, k;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isBetter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> round)</span>
+</span>{
+    <span class="hljs-keyword">int</span> apos = <span class="hljs-number">50</span>, bpos = <span class="hljs-number">50</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">if</span> (results[round][i] == a)
+        {
+            apos = i;
+        }
+        <span class="hljs-keyword">if</span> (results[round][i] == b)
+        {
+            bpos = i;
+        }
+    }
+    <span class="hljs-keyword">return</span> apos &lt; bpos;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numBetter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span>
+</span>{
+    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> round = <span class="hljs-number">0</span>; round &lt; k; round++)
+    {
+        <span class="hljs-keyword">if</span> (isBetter(a, b, round))
+        {
+            count += <span class="hljs-number">1</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"gymnastics.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"gymnastics.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; k &gt;&gt; n;
+
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++)
+    {
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+        {
+            <span class="hljs-built_in">cin</span> &gt;&gt; results[i][j];
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++)
+        {
+            <span class="hljs-keyword">if</span> (numBetter(i, j) == k)
+            {
+                ans += <span class="hljs-number">1</span>;
+            }
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 9/12/2022</p>

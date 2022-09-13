@@ -3,7 +3,7 @@
 <p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/milkPails.cpp">GitHub link</a></p>
 <p>This is an old usaco bronze problem that I found through usaco.guide.</p>
 <p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=615">here</a>&#39;s a link so you can read it.</p>
-<p>This problem was extremely easy. In ideal conditions, bucket x or y would perfectly fit into bucket m in m / x or y trips. However, it&#39;s far more likely that m is not perfectly divisible by x or y and instead is best filled by a combination of the two. In order to solve this, I just brute forced every possible combination of buckets until one filled m the most. </p>
+<p>This problem was extremely easy. In ideal conditions, bucket x or y would perfectly fit into bucket m in m / x or y trips. However, it&#39;s far more likely that m is not perfectly divisible by x or y and instead is best filled by a combination of the two. In order to solve this, I just brute forced every possible combination of buckets until one filled m the most. Here's the code of this problem:</p>
 <pre><code>for (<span class="hljs-name">int</span> i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt;= m / x; i++)</span>
 {
     for (<span class="hljs-name">int</span> j = <span class="hljs-number">0</span><span class="hljs-comment">; j &lt;= m / y; j++)</span>
