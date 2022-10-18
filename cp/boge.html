@@ -1,0 +1,51 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="bovine-genomics">Bovine Genomics</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bovineGenomicsBronze.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=736">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is very simple. All that we have to do is check if the spotty cow list has any genomes in common with the plain cow list. If it doesn&#39;t, we increment our answer by one. Here&#39;s the code for this problem: </p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">bool</span>&gt; one, <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">bool</span>&gt; two)</span>
+</span>{
+    <span class="hljs-keyword">return</span> (one[<span class="hljs-string">'A'</span>] == <span class="hljs-literal">true</span> &amp;&amp; two[<span class="hljs-string">'A'</span>]) || (one[<span class="hljs-string">'C'</span>] == <span class="hljs-literal">true</span> &amp;&amp; two[<span class="hljs-string">'C'</span>]) || (one[<span class="hljs-string">'T'</span>] == <span class="hljs-literal">true</span> &amp;&amp; two[<span class="hljs-string">'T'</span>]) || (one[<span class="hljs-string">'G'</span>] == <span class="hljs-literal">true</span> &amp;&amp; two[<span class="hljs-string">'G'</span>]);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"cownomics.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"cownomics.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, m, ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;
+    <span class="hljs-keyword">char</span> dna[n * <span class="hljs-number">2</span>][m];
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n * <span class="hljs-number">2</span>; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++)
+        {
+            <span class="hljs-built_in">cin</span> &gt;&gt; dna[i][j];
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++)
+    {
+        <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">bool</span>&gt; letters1 = {{<span class="hljs-string">'A'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'C'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'T'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'G'</span>, <span class="hljs-literal">false</span>}};
+        <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">bool</span>&gt; letters2 = {{<span class="hljs-string">'A'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'C'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'T'</span>, <span class="hljs-literal">false</span>}, {<span class="hljs-string">'G'</span>, <span class="hljs-literal">false</span>}};
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+        {
+            letters1[dna[j][i]] = <span class="hljs-literal">true</span>;
+            letters2[dna[(n * <span class="hljs-number">2</span>) - j - <span class="hljs-number">1</span>][i]] = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">if</span> (check(letters1, letters2))
+            {
+                <span class="hljs-keyword">break</span>;
+            }
+            <span class="hljs-keyword">if</span> (j == n - <span class="hljs-number">1</span>)
+            {
+                ans += <span class="hljs-number">1</span>;
+            }
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 10/17/2022</p>
