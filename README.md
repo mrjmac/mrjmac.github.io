@@ -1,3 +1,5 @@
 # mrjmac.github.io
 
-My personal website
+My personal website.
+
+Competitive programming section out of date but updates coming soon.
