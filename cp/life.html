@@ -1,0 +1,56 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="lifeguards">Lifeguards</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/lifeguards.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=784">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is pretty basic, because N is 100 at max and each time period is 1000 units, we can fire each lifeguard and simulate how much time is covered without them. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">int</span> n, a, b, maxCover, numCover, covered[<span class="hljs-number">1000</span>];
+<span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; shift;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"lifeguards.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"lifeguards.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+    shift.resize(n);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; a &gt;&gt; b;
+        shift[i] = make_pair(a, b);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = a; j &lt; b; j++)
+        {
+            covered[j]++;
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; worker : shift)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = worker.first; i &lt; worker.second; i++)
+        {
+            covered[i]--;
+        }
+
+        numCover = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++)
+        {
+            <span class="hljs-keyword">if</span> (covered[i] &gt; <span class="hljs-number">0</span>)
+            {
+                numCover++;
+            }
+        }
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = worker.first; i &lt; worker.second; i++)
+        {
+            covered[i]++;
+        }
+
+        maxCover = max(maxCover, numCover);
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; maxCover &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 10/20/2022</p>
