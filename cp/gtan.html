@@ -1,0 +1,60 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="guess-the-animal">Guess the Animal</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/guessTheAnimal.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=893">here</a>&#39;s a link so you can read it.</p>
+<p>This problem was pretty fun. The trick to this problem is figuring out how you would go about this in real life. Bessie will no longer guess any animals if they all have a trait in common and that trait is confirmed to be wrong. Therefore, she will only ever not eliminate an animal if it has a true trait in common with another one. This means that Bessie could ask about every common trait between two animals before finally finding the one trait that there isn&#39;t an overlap between. Therefore, we just have to find which two animals have the greatest overlap in their traits, and the answer is that plus 1. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">overlap</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; a, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; b)</span>
+</span>{
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; (<span class="hljs-keyword">int</span>) a.size(); i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; (<span class="hljs-keyword">int</span>) b.size(); j++)
+        {
+            <span class="hljs-keyword">if</span> (a[i] == b[j])
+            {
+                ans += <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> ans;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"guess.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"guess.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; desc(n);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">string</span> name;
+        <span class="hljs-keyword">int</span> numChar;
+        <span class="hljs-built_in">cin</span> &gt;&gt; name &gt;&gt; numChar;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; numChar; j++)
+        {
+            <span class="hljs-built_in">string</span> attri;
+            <span class="hljs-built_in">cin</span> &gt;&gt; attri;
+            desc[i].push_back(attri);
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; j++)
+        {
+            <span class="hljs-keyword">int</span> curr = overlap(desc[i], desc[j]) + <span class="hljs-number">1</span>;
+            ans = max(ans, curr);
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 10/22/2022</p>
