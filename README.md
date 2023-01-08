@@ -2,4 +2,6 @@
 
 My personal website.
 
-Competitive programming section out of date but updates coming soon.
+Competitive programming section extremely out of date.
+
+Might add a robotics section at some point.
