@@ -1,0 +1,107 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="bovine-genomics-silver-">Bovine Genomics (Silver)</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bovineGenomicsSilver.cpp">GitHub link</a></p>
+<p>This is an old usaco silver problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=739">here</a>&#39;s a link so you can read it.</p>
+<p>All that we have to do is loop through all possible combinations of positions and check if a plain cow ever has the same combination of characters at those positions are a spotted cow. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"cownomics.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"cownomics.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, m;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; spotted(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(m));
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">string</span> genome;
+        <span class="hljs-built_in">cin</span> &gt;&gt; genome;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++)
+        {
+            <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'A'</span>)
+            {
+                spotted[i][j] = <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'T'</span>)
+            {
+                spotted[i][j] = <span class="hljs-number">1</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'C'</span>)
+            {
+                spotted[i][j] = <span class="hljs-number">2</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'G'</span>)
+            {
+                spotted[i][j] = <span class="hljs-number">3</span>;
+            }
+        }
+    }
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; plain(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(m));
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">string</span> genome;
+        <span class="hljs-built_in">cin</span> &gt;&gt; genome;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++)
+        {
+            <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'A'</span>)
+            {
+                plain[i][j] = <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'T'</span>)
+            {
+                plain[i][j] = <span class="hljs-number">1</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'C'</span>)
+            {
+                plain[i][j] = <span class="hljs-number">2</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (genome[j] == <span class="hljs-string">'G'</span>)
+            {
+                plain[i][j] = <span class="hljs-number">3</span>;
+            }
+        }
+    }
+
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; m; j++)
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = j + <span class="hljs-number">1</span>; k &lt; m; k++)
+            {
+                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; spotted2(<span class="hljs-number">64</span>);
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> scow = <span class="hljs-number">0</span>; scow &lt; n; scow++)
+                {
+                    <span class="hljs-keyword">int</span> total = (spotted[scow][i] * <span class="hljs-number">16</span>) + (spotted[scow][j] * <span class="hljs-number">4</span>) + (spotted[scow][k] * <span class="hljs-number">1</span>);
+                    spotted2[total] = <span class="hljs-literal">true</span>;
+                }
+
+                <span class="hljs-keyword">bool</span> valid = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> normal = <span class="hljs-number">0</span>; normal &lt; n; normal++)
+                {
+                    <span class="hljs-keyword">int</span> total = (plain[normal][i] * <span class="hljs-number">16</span>) + (plain[normal][j] * <span class="hljs-number">4</span>) + (plain[normal][k] * <span class="hljs-number">1</span>);
+                    <span class="hljs-keyword">if</span> (spotted2[total])
+                    {
+                        valid = <span class="hljs-literal">false</span>;
+                        <span class="hljs-keyword">break</span>;
+                    }
+                }
+
+                ans += valid;
+            }
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 1/7/2023</p>
