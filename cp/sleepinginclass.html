@@ -1,0 +1,62 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="sleeping-in-class">Sleeping in Class</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/sleepingInClass.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://usaco.org/index.php?page=viewproblem2&amp;cpid=1203">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is pretty easy once you break it up into parts. The first thing I realized was that in order for Elsie to combine all numbers in the array into n class periods, the total sum of times slept in all periods must be divisible by n. To minimize the number of moves that Elsie has to make, we want to maximize n. From here on, the problem is really simple. Starting at n = number of class periods, we just need to simulate combining the class periods if the sum of times slept in all class periods is divisible by n. If we can simulate this without error, we can output the total number of class periods - n, as Elsie can only combine class periods one at a time and is trying to make there be n class periods. Here&#39;s the code for this problem</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> t;
+    <span class="hljs-built_in">cin</span> &gt;&gt; t;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span> ; i &lt; t; i++)
+    {
+        <span class="hljs-keyword">int</span> n, sum = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">cin</span> &gt;&gt; n;
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; days(n);
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; n; k++)
+        {
+            <span class="hljs-built_in">cin</span> &gt;&gt; days[k];
+            sum += days[k];
+        }
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = n; k &gt;= <span class="hljs-number">1</span>; k--)
+        {
+            <span class="hljs-keyword">if</span> (sum % k == <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-keyword">int</span> target = sum / k;
+                <span class="hljs-keyword">int</span> curr = <span class="hljs-number">0</span>;
+                <span class="hljs-keyword">bool</span> valid = <span class="hljs-literal">true</span>;
+
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+                {
+                    curr += days[j];
+                    <span class="hljs-keyword">if</span> (curr &gt; target)
+                    {
+                        valid = <span class="hljs-literal">false</span>;
+                        <span class="hljs-keyword">break</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (curr == target)
+                    {
+                        curr = <span class="hljs-number">0</span>;
+                    }
+                }
+
+                <span class="hljs-keyword">if</span> (valid)
+                {
+                    <span class="hljs-built_in">cout</span> &lt;&lt; n - k &lt;&lt; <span class="hljs-string">"\n"</span>;
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+        }
+    }
+}
+</code></pre><p>Entry written 1/7/2023</p>

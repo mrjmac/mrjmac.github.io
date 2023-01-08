@@ -1,0 +1,100 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="cowntact-tracing">Cowntact Tracing</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/cowntactTracing.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=1037">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is pretty simple. You just have to check if every cow could be patient one for a specific value of k. You can easily do this by brute forcing it due to the low limits on n and t. Here&#39;s the code for this problem: </p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isConsistent</span><span class="hljs-params">(<span class="hljs-keyword">int</span> patientZero, <span class="hljs-keyword">int</span> k, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>&gt;&gt; shakes, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; cowsInfected)</span>
+</span>{
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; tempInfec((<span class="hljs-keyword">int</span>) cowsInfected.size());
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; numShakes((<span class="hljs-keyword">int</span>) cowsInfected.size());
+    tempInfec[patientZero] = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>&gt; shake : shakes)
+    {
+        <span class="hljs-keyword">if</span> (tempInfec[shake[<span class="hljs-number">1</span>]])
+        {
+            numShakes[shake[<span class="hljs-number">1</span>]]++;
+        }
+        <span class="hljs-keyword">if</span> (tempInfec[shake[<span class="hljs-number">2</span>]])
+        {
+            numShakes[shake[<span class="hljs-number">2</span>]]++;
+        }
+        <span class="hljs-keyword">if</span> (numShakes[shake[<span class="hljs-number">1</span>]] &lt;= k &amp;&amp; tempInfec[shake[<span class="hljs-number">1</span>]])
+        {
+            tempInfec[shake[<span class="hljs-number">2</span>]] = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (numShakes[shake[<span class="hljs-number">2</span>]] &lt;= k &amp;&amp; tempInfec[shake[<span class="hljs-number">2</span>]])
+        {
+            tempInfec[shake[<span class="hljs-number">1</span>]] = <span class="hljs-literal">true</span>;
+        }
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-keyword">int</span>) cowsInfected.size(); i++)
+    {
+        <span class="hljs-keyword">if</span> (tempInfec[i] != cowsInfected[i])
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"tracing.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"tracing.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, t;
+    <span class="hljs-built_in">string</span> s;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; t &gt;&gt; s;
+
+    <span class="hljs-built_in">unordered_set</span>&lt;<span class="hljs-keyword">int</span>&gt; ans;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, 3&gt;&gt; shakes(t);
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; cowsInfected(n);
+    <span class="hljs-keyword">int</span> minK = t, maxK = <span class="hljs-number">-1</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        cowsInfected[i] = (s[i] == <span class="hljs-string">'1'</span>);
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; t; i++)
+    {
+        <span class="hljs-keyword">int</span> x, y, z;
+        <span class="hljs-built_in">cin</span> &gt;&gt; z &gt;&gt; x &gt;&gt; y;
+
+        shakes[i] = {z - <span class="hljs-number">1</span>, x - <span class="hljs-number">1</span>, y - <span class="hljs-number">1</span>};
+    }
+
+    sort(shakes.begin(), shakes.end(), [](<span class="hljs-keyword">auto</span> &amp;left, <span class="hljs-keyword">auto</span> &amp;right)
+    {
+        <span class="hljs-keyword">return</span> left[<span class="hljs-number">0</span>] &lt; right[<span class="hljs-number">0</span>];
+    });
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> patZ = <span class="hljs-number">0</span>; patZ &lt; n; patZ++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt;= t; k++)
+        {
+            <span class="hljs-keyword">if</span> (isConsistent(patZ, k, shakes, cowsInfected))
+            {
+                ans.insert(patZ);
+                minK = min(minK, k);
+                maxK = max(maxK, k);
+            }
+        }
+    }
+
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans.size() &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; minK &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; (maxK == t ? <span class="hljs-string">"Infinity"</span> : to_string(maxK)) &lt;&lt; <span class="hljs-string">"\n"</span>;
+
+}
+</code></pre><p>Entry written 1/7/2023</p>

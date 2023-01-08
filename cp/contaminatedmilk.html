@@ -1,0 +1,77 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="contaminated-milk">Contaminated Milk</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/contaminatedMilk.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=569">here</a>&#39;s a link so you can read it.</p>
+<p>Due to the low limits of n and m in this problem, all that we have to do is simulate the party to figure out which milks could&#39;ve been bad. While doing this, we need to keep track of how many people would have gotten sick if it was bad. Then, we just have to output the maximum number of people who could possibly be sick.</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"badmilk.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"badmilk.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, m, d, s, ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; d &gt;&gt; s;
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, 3&gt;&gt; events(d + s);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; (d + s); i++)
+    {
+        <span class="hljs-keyword">if</span> (i &lt; d)
+        {
+            <span class="hljs-keyword">int</span> p, mi, t;
+            <span class="hljs-built_in">cin</span> &gt;&gt; p &gt;&gt; mi &gt;&gt; t;
+            events[i] = {p - <span class="hljs-number">1</span>, mi, t};
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">int</span> p, t;
+            <span class="hljs-built_in">cin</span> &gt;&gt; p &gt;&gt; t;
+            events[i] = {p - <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>, t};
+        }
+    }
+
+    sort(events.begin(), events.end(), [](<span class="hljs-keyword">auto</span> &amp;left, <span class="hljs-keyword">auto</span> &amp;right)
+    {
+        <span class="hljs-keyword">return</span> left[<span class="hljs-number">2</span>] != right[<span class="hljs-number">2</span>] ? left[<span class="hljs-number">2</span>] &lt; right[<span class="hljs-number">2</span>] : left[<span class="hljs-number">1</span>] &lt; right[<span class="hljs-number">1</span>];
+    });
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= m; i++)
+    {
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; sick(n);
+        <span class="hljs-keyword">bool</span> valid = <span class="hljs-literal">true</span>;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; (<span class="hljs-keyword">int</span>) events.size(); j++)
+        {
+            <span class="hljs-keyword">if</span> (events[j][<span class="hljs-number">1</span>] == <span class="hljs-number">-1</span>)
+            {
+                <span class="hljs-keyword">if</span> (!sick[events[j][<span class="hljs-number">0</span>]])
+                {
+                    valid = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (events[j][<span class="hljs-number">1</span>] == i)
+            {
+                sick[events[j][<span class="hljs-number">0</span>]] = <span class="hljs-literal">true</span>;
+            }
+        }
+
+        <span class="hljs-keyword">if</span> (valid)
+        {
+            <span class="hljs-keyword">int</span> curr = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">bool</span> a : sick)
+            {
+                curr += a;
+            }
+            ans = max(curr, ans);
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 1/7/2023</p>
