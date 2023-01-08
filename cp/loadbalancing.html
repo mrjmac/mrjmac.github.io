@@ -1,0 +1,64 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="load-balancing-bronze-">Load Balancing (Bronze)</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/loadBalancingBronze.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=617">here</a>&#39;s a link so you can read it.</p>
+<p>The first thing that I noticed when doing this problem is that there is no way you can possibly check every coordinate from (0, 0) to (n, n) and not exceed the time limit. However, this problem becomes quite easy once you realize that checking almost all of these coordinates is completely redundant. The only time that moving a fence post changes how many cows are in each quadrant is when you move a post past a cow. Therefore, we can check every position that is one above and one to the right of every cow, leaving us with only having to check n positions. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"balancing.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"balancing.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">int</span> n, b;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; b;
+
+    <span class="hljs-keyword">int</span> ans = n;
+    <span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; cows(n);
+    <span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; fences(n);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">int</span> x, y;
+        <span class="hljs-built_in">cin</span> &gt;&gt; x &gt;&gt; y;
+        cows[i] = make_pair(x, y);
+        fences[i] = make_pair(x + <span class="hljs-number">1</span>, y + <span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+        {
+            <span class="hljs-keyword">int</span> tl = <span class="hljs-number">0</span>, tr = <span class="hljs-number">0l</span>, br = <span class="hljs-number">0</span>, bl = <span class="hljs-number">0</span>;
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; n; k++)
+            {
+                <span class="hljs-keyword">if</span> (cows[k].first &lt; fences[i].first &amp;&amp; cows[k].second &gt; fences[j].second)
+                {
+                    tl++;
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cows[k].first &gt; fences[i].first &amp;&amp; cows[k].second &gt; fences[j].second)
+                {
+                    tr++;
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cows[k].first &lt; fences[i].first &amp;&amp; cows[k].second &lt; fences[j].second)
+                {
+                    bl++;
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cows[k].first &gt; fences[i].first &amp;&amp; cows[k].second &lt; fences[j].second)
+                {
+                    br++;
+                }
+            }
+
+            ans = min(ans, max({tl, tr, bl, br}));
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 1/7/2023</p>
