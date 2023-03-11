@@ -68,7 +68,7 @@
 <li>Starts at the first value in the array and compares it to the second value. If the first value is bigger than the second, they are swapped. This process continues until the end of the array is reached.</li>
 <li>Once the end of the array is reached, the process is started again. However, since we know that the last value is the biggest, we only sort until Array.length - 1.</li>
 <li>This process is continued with the search going one spot less until all numbers are in the correct position.</li>
-<li>As there are two for loops, the time complexity here on the average and worst cases are O(n^2). However, if code is written to terminate the process once the Array is sorted, this method is O(n) on it&#39;s best case.</li>
+<li>As there are two for loops, the time complexity here on the average and worst cases is O(n^2) and O(n) in best case.</li>
 <li>The main code loop:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">sort</span>.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i++)
 {
