@@ -1,99 +1,98 @@
 <style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
-<h1 id="bull-in-a-china-shop">Bull in a China Shop</h1>
-<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bullInAChinaShop.cpp">GitHub link</a></p>
-<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
-<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=640">here</a>&#39;s a link so you can read it.</p>
-<p>This problem seems rather hard at first but due to low time limits it&#39;s very easy to just brute force every piece in every position until they match the original shape. To speed up our solution we can quit anytime that a piece has overlapping #s or if it doesn&#39;t match the original piece. Here&#39;s the code for this problem: </p>
-<pre><code><span class="hljs-comment">#include &lt;bits/stdc++.h&gt;</span>
 
-using namespace std<span class="hljs-comment">;</span>
 
-<span class="hljs-keyword">bool </span>pieces[<span class="hljs-number">11</span>][<span class="hljs-number">8</span>][<span class="hljs-number">8</span>]<span class="hljs-comment">;</span>
-vector&lt;int&gt; s[<span class="hljs-number">11</span>]<span class="hljs-comment">;</span>
-int n<span class="hljs-comment">;</span>
-
-int main()
+<h1 id="load-balancing-silver-">Load Balancing (Silver)</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/loadBalancingSilver.cpp">GitHub link</a></p>
+<p>This is an old usaco silver problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=619">here</a>&#39;s a link so you can read it.</p>
+<p>In the bronze version of this problem, we were able to check every possible different placement of a fence. This was too slow for the silver version of the problem. We can speed up our bronze solution by locking one fence in place and determining the best position for the other fence. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-built_in">int</span> findBal(<span class="hljs-built_in">int</span> x_line, <span class="hljs-keyword">const</span> vector&lt;pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;&gt; cows)
 {
-    cin.tie(<span class="hljs-number">0</span>)-&gt;<span class="hljs-keyword">sync_with_stdio(0);
-</span>    freopen(<span class="hljs-string">"bcs.in"</span>, <span class="hljs-string">"r"</span>, stdin)<span class="hljs-comment">;</span>
-    freopen(<span class="hljs-string">"bcs.out"</span>, <span class="hljs-string">"w"</span>, stdout)<span class="hljs-comment">;</span>
-
-    int k, left, right, top, <span class="hljs-keyword">bottom;
-</span>    cin &gt;&gt; n &gt;&gt; k<span class="hljs-comment">;</span>
-    char c<span class="hljs-comment">;</span>
-
-    for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt;= k; i++)</span>
+    vector&lt;pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;&gt; <span class="hljs-built_in">left</span>;
+    vector&lt;pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;&gt; <span class="hljs-built_in">right</span>;
+    <span class="hljs-keyword">for</span> (pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt; c : cows)
     {
-        left = n - <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-        right = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
-        top = n - <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-        <span class="hljs-keyword">bottom </span>= <span class="hljs-number">0</span><span class="hljs-comment">;</span>
-        for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">0</span><span class="hljs-comment">; j &lt; n; j++)</span>
+        <span class="hljs-keyword">if</span> (c.first &lt; x_line)
         {
-            for (int l = <span class="hljs-number">0</span><span class="hljs-comment">; l &lt; n; l++)</span>
-            {
-                cin &gt;&gt; c<span class="hljs-comment">;</span>
-                pieces[i][<span class="hljs-keyword">j][l] </span>= (c == <span class="hljs-string">'#'</span>)<span class="hljs-comment">;</span>
-
-                if (pieces[i][<span class="hljs-keyword">j][l])
-</span>                {
-                    <span class="hljs-keyword">bottom </span>= max(<span class="hljs-keyword">bottom, </span><span class="hljs-keyword">j);
-</span>                    top = min(top, <span class="hljs-keyword">j);
-</span>                    right = max(right, l)<span class="hljs-comment">;</span>
-                    left = min(left, l)<span class="hljs-comment">;</span>
-                }
-            }
+            <span class="hljs-built_in">left</span>.push_back(c);
         }
-        s[i] = {left, right, top, <span class="hljs-keyword">bottom};
-</span>    }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c.first &gt; x_line)
+        {
+            <span class="hljs-built_in">right</span>.push_back(c);
+        }
+    }
 
-    for (int i = <span class="hljs-number">1</span><span class="hljs-comment">; i &lt;= k; i++)</span>
+    <span class="hljs-built_in">int</span> mostbal = INT32_MAX;
+    <span class="hljs-built_in">int</span> left_at = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">int</span> right_at = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">while</span> (left_at + right_at &lt; (<span class="hljs-built_in">int</span>) cows.size())
     {
-        for (int <span class="hljs-keyword">j </span>= i + <span class="hljs-number">1</span><span class="hljs-comment">; j &lt;= k; j++)</span>
-        {
-            for (int idx = s[i][<span class="hljs-number">3</span>] - n + <span class="hljs-number">1</span><span class="hljs-comment">; idx &lt;= s[i][2]; idx++)</span>
-            {
-                for (int idy = s[i][<span class="hljs-number">1</span>] - n + <span class="hljs-number">1</span><span class="hljs-comment">; idy &lt;= s[i][0]; idy++)</span>
-                {
-                    for (int <span class="hljs-keyword">jdx </span>= s[<span class="hljs-keyword">j][3] </span>- n + <span class="hljs-number">1</span><span class="hljs-comment">; jdx &lt;= s[j][2]; jdx++)</span>
-                    {
-                        for (int <span class="hljs-keyword">jdy </span>= s[<span class="hljs-keyword">j][1] </span>- n + <span class="hljs-number">1</span><span class="hljs-comment">; jdy &lt;= s[j][0]; jdy++)</span>
-                        {
-                            <span class="hljs-keyword">bool </span>ok = true<span class="hljs-comment">;</span>
-                            for (int x = <span class="hljs-number">0</span><span class="hljs-comment">; x &lt; n; x++)</span>
-                            {
-                                for (int y = <span class="hljs-number">0</span><span class="hljs-comment">; y &lt; n; y++)</span>
-                                {
-                                    <span class="hljs-keyword">bool </span>ip = ((x + idx) &gt;= <span class="hljs-number">0</span> &amp;&amp; (x + idx) &lt; n &amp;&amp; (y + idy) &gt;= <span class="hljs-number">0</span> &amp;&amp; (y + idy) &lt; n &amp;&amp; pieces[i][x + idx][y + idy])<span class="hljs-comment">;</span>
-                                    <span class="hljs-keyword">bool </span><span class="hljs-keyword">jp </span>= ((x + <span class="hljs-keyword">jdx) </span>&gt;= <span class="hljs-number">0</span> &amp;&amp; (x + <span class="hljs-keyword">jdx) </span>&lt; n &amp;&amp; (y + <span class="hljs-keyword">jdy) </span>&gt;= <span class="hljs-number">0</span> &amp;&amp; (y + <span class="hljs-keyword">jdy) </span>&lt; n &amp;&amp; pieces[<span class="hljs-keyword">j][x </span>+ <span class="hljs-keyword">jdx][y </span>+ <span class="hljs-keyword">jdy]);
-</span>
-                                    if (ip &amp;&amp; <span class="hljs-keyword">jp)
-</span>                                    {
-                                        ok = false<span class="hljs-comment">;</span>
-                                        <span class="hljs-keyword">break;
-</span>                                    }
+        <span class="hljs-built_in">int</span> y_line = cows[left_at + right_at].<span class="hljs-built_in">second</span> + <span class="hljs-number">1</span>;
 
-                                    if (pieces[<span class="hljs-number">0</span>][x][y] != (ip <span class="hljs-title">||</span> <span class="hljs-keyword">jp))
-</span>                                    {
-                                        ok = false<span class="hljs-comment">;</span>
-                                        <span class="hljs-keyword">break;
-</span>                                    }
-                                }
-                                if (!ok)
-                                {
-                                    <span class="hljs-keyword">break;
-</span>                                }
-                            }
-                            if (ok)
-                            {
-                                cout &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-keyword">j </span>&lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
-                                return <span class="hljs-number">0</span><span class="hljs-comment">;</span>
-                            }
-                        }
-                    }
-                }
-            }
+        <span class="hljs-keyword">while</span> (left_at &lt; (<span class="hljs-built_in">int</span>) <span class="hljs-built_in">left</span>.size() &amp;&amp; y_line &gt; <span class="hljs-built_in">left</span>[left_at].<span class="hljs-built_in">second</span>)
+        {
+            left_at++;
         }
-    }   
+
+        <span class="hljs-keyword">while</span> (right_at &lt; (<span class="hljs-built_in">int</span>) <span class="hljs-built_in">right</span>.size() &amp;&amp; y_line &gt; <span class="hljs-built_in">right</span>[right_at].<span class="hljs-built_in">second</span>)
+        {
+            right_at++;
+        }
+
+        <span class="hljs-built_in">int</span> bmax = max(left_at, right_at);
+        <span class="hljs-built_in">int</span> amax = max(<span class="hljs-built_in">left</span>.size() - left_at, <span class="hljs-built_in">right</span>.size() - right_at);
+
+        mostbal = min(mostbal, max(amax, bmax));
+    }
+
+    return mostbal;
 }
-</code></pre><p>Entry written 1/8/2023</p>
+
+<span class="hljs-built_in">int</span> main()
+{
+    cin.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"balancing.in"</span>, <span class="hljs-string">"r"</span>, stdin);
+    freopen(<span class="hljs-string">"balancing.out"</span>, <span class="hljs-string">"w"</span>, stdout);
+
+    <span class="hljs-built_in">int</span> n;
+    cin &gt;&gt; n;
+
+    vector&lt;pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;&gt; cowsx(n);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">int</span> x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        cowsx[i] = make_pair(x, y);
+    }
+
+    sort(cowsx.begin(), cowsx.<span class="hljs-keyword">end</span>(), [](auto &amp;<span class="hljs-built_in">left</span>, auto &amp;<span class="hljs-built_in">right</span>)
+    {
+        return <span class="hljs-built_in">left</span>.first &lt; <span class="hljs-built_in">right</span>.first;
+    });
+
+    vector&lt;pair&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;&gt; cowsy(cowsx);
+    sort(cowsy.begin(), cowsy.<span class="hljs-keyword">end</span>(), [](auto &amp;<span class="hljs-built_in">left</span>, auto &amp;<span class="hljs-built_in">right</span>)
+    {
+        return <span class="hljs-built_in">left</span>.<span class="hljs-built_in">second</span> &lt; <span class="hljs-built_in">right</span>.<span class="hljs-built_in">second</span>;
+    });
+
+
+    <span class="hljs-built_in">int</span> ans = INT32_MAX;
+    <span class="hljs-built_in">int</span> x_line_at = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">while</span> (x_line_at &lt; (<span class="hljs-built_in">int</span>) cowsx.size())
+    {
+        <span class="hljs-built_in">int</span> x_line = cowsx[x_line_at].first + <span class="hljs-number">1</span>;
+        ans = min(ans, findBal(x_line, cowsy));
+
+        <span class="hljs-keyword">while</span> (x_line_at &lt; n &amp;&amp; x_line &gt; cowsx[x_line_at].first)
+        {
+            x_line_at++;
+        }
+    }
+
+    cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 3/11/2023</p>

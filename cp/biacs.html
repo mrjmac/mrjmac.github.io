@@ -1,0 +1,99 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="bull-in-a-china-shop">Bull in a China Shop</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/bullInAChinaShop.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=640">here</a>&#39;s a link so you can read it.</p>
+<p>This problem seems rather hard at first but due to low time limits it&#39;s very easy to just brute force every piece in every position until they match the original shape. To speed up our solution we can quit anytime that a piece has overlapping #s or if it doesn&#39;t match the original piece. Here&#39;s the code for this problem: </p>
+<pre><code><span class="hljs-comment">#include &lt;bits/stdc++.h&gt;</span>
+
+using namespace std<span class="hljs-comment">;</span>
+
+<span class="hljs-keyword">bool </span>pieces[<span class="hljs-number">11</span>][<span class="hljs-number">8</span>][<span class="hljs-number">8</span>]<span class="hljs-comment">;</span>
+vector&lt;int&gt; s[<span class="hljs-number">11</span>]<span class="hljs-comment">;</span>
+int n<span class="hljs-comment">;</span>
+
+int main()
+{
+    cin.tie(<span class="hljs-number">0</span>)-&gt;<span class="hljs-keyword">sync_with_stdio(0);
+</span>    freopen(<span class="hljs-string">"bcs.in"</span>, <span class="hljs-string">"r"</span>, stdin)<span class="hljs-comment">;</span>
+    freopen(<span class="hljs-string">"bcs.out"</span>, <span class="hljs-string">"w"</span>, stdout)<span class="hljs-comment">;</span>
+
+    int k, left, right, top, <span class="hljs-keyword">bottom;
+</span>    cin &gt;&gt; n &gt;&gt; k<span class="hljs-comment">;</span>
+    char c<span class="hljs-comment">;</span>
+
+    for (int i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt;= k; i++)</span>
+    {
+        left = n - <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        right = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        top = n - <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+        <span class="hljs-keyword">bottom </span>= <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">0</span><span class="hljs-comment">; j &lt; n; j++)</span>
+        {
+            for (int l = <span class="hljs-number">0</span><span class="hljs-comment">; l &lt; n; l++)</span>
+            {
+                cin &gt;&gt; c<span class="hljs-comment">;</span>
+                pieces[i][<span class="hljs-keyword">j][l] </span>= (c == <span class="hljs-string">'#'</span>)<span class="hljs-comment">;</span>
+
+                if (pieces[i][<span class="hljs-keyword">j][l])
+</span>                {
+                    <span class="hljs-keyword">bottom </span>= max(<span class="hljs-keyword">bottom, </span><span class="hljs-keyword">j);
+</span>                    top = min(top, <span class="hljs-keyword">j);
+</span>                    right = max(right, l)<span class="hljs-comment">;</span>
+                    left = min(left, l)<span class="hljs-comment">;</span>
+                }
+            }
+        }
+        s[i] = {left, right, top, <span class="hljs-keyword">bottom};
+</span>    }
+
+    for (int i = <span class="hljs-number">1</span><span class="hljs-comment">; i &lt;= k; i++)</span>
+    {
+        for (int <span class="hljs-keyword">j </span>= i + <span class="hljs-number">1</span><span class="hljs-comment">; j &lt;= k; j++)</span>
+        {
+            for (int idx = s[i][<span class="hljs-number">3</span>] - n + <span class="hljs-number">1</span><span class="hljs-comment">; idx &lt;= s[i][2]; idx++)</span>
+            {
+                for (int idy = s[i][<span class="hljs-number">1</span>] - n + <span class="hljs-number">1</span><span class="hljs-comment">; idy &lt;= s[i][0]; idy++)</span>
+                {
+                    for (int <span class="hljs-keyword">jdx </span>= s[<span class="hljs-keyword">j][3] </span>- n + <span class="hljs-number">1</span><span class="hljs-comment">; jdx &lt;= s[j][2]; jdx++)</span>
+                    {
+                        for (int <span class="hljs-keyword">jdy </span>= s[<span class="hljs-keyword">j][1] </span>- n + <span class="hljs-number">1</span><span class="hljs-comment">; jdy &lt;= s[j][0]; jdy++)</span>
+                        {
+                            <span class="hljs-keyword">bool </span>ok = true<span class="hljs-comment">;</span>
+                            for (int x = <span class="hljs-number">0</span><span class="hljs-comment">; x &lt; n; x++)</span>
+                            {
+                                for (int y = <span class="hljs-number">0</span><span class="hljs-comment">; y &lt; n; y++)</span>
+                                {
+                                    <span class="hljs-keyword">bool </span>ip = ((x + idx) &gt;= <span class="hljs-number">0</span> &amp;&amp; (x + idx) &lt; n &amp;&amp; (y + idy) &gt;= <span class="hljs-number">0</span> &amp;&amp; (y + idy) &lt; n &amp;&amp; pieces[i][x + idx][y + idy])<span class="hljs-comment">;</span>
+                                    <span class="hljs-keyword">bool </span><span class="hljs-keyword">jp </span>= ((x + <span class="hljs-keyword">jdx) </span>&gt;= <span class="hljs-number">0</span> &amp;&amp; (x + <span class="hljs-keyword">jdx) </span>&lt; n &amp;&amp; (y + <span class="hljs-keyword">jdy) </span>&gt;= <span class="hljs-number">0</span> &amp;&amp; (y + <span class="hljs-keyword">jdy) </span>&lt; n &amp;&amp; pieces[<span class="hljs-keyword">j][x </span>+ <span class="hljs-keyword">jdx][y </span>+ <span class="hljs-keyword">jdy]);
+</span>
+                                    if (ip &amp;&amp; <span class="hljs-keyword">jp)
+</span>                                    {
+                                        ok = false<span class="hljs-comment">;</span>
+                                        <span class="hljs-keyword">break;
+</span>                                    }
+
+                                    if (pieces[<span class="hljs-number">0</span>][x][y] != (ip <span class="hljs-title">||</span> <span class="hljs-keyword">jp))
+</span>                                    {
+                                        ok = false<span class="hljs-comment">;</span>
+                                        <span class="hljs-keyword">break;
+</span>                                    }
+                                }
+                                if (!ok)
+                                {
+                                    <span class="hljs-keyword">break;
+</span>                                }
+                            }
+                            if (ok)
+                            {
+                                cout &lt;&lt; i &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; <span class="hljs-keyword">j </span>&lt;&lt; <span class="hljs-string">"\n"</span><span class="hljs-comment">;</span>
+                                return <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }   
+}
+</code></pre><p>Entry written 1/8/2023</p>
