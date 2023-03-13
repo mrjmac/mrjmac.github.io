@@ -1,0 +1,44 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style><h1 id="weird-algorithim">Weird Algorithim</h1>
+
+<h1 id="apple-division-revisited-">Apple Division (Revisited)</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/appleDivisionBitmask.cpp">GitHub link</a></p>
+<p><a href="https://mrjmac.github.io/cp/apdi.html">Original writeup</a></p>
+<p>This is the fifteenth problem in the CSES problem set.</p>
+<p>The problem goes like this: There are n apples with known weights. Your task is to divide the apples into two groups so that the difference between the weights of the groups is minimal and output the minimum difference between the weights of the two groups.</p>
+<p>My second solution to this problem was an implementation using bitmasks for practice. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> weights[<span class="hljs-number">20</span>];
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; weights[i];
+    }
+
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ans = LONG_LONG_MAX;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-number">1</span> &lt;&lt; n); i++)
+    {
+        <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> s1 = <span class="hljs-number">0</span>, s2 = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)
+        {
+            <span class="hljs-keyword">if</span> (i &amp; (<span class="hljs-number">1</span> &lt;&lt; j))
+            {
+                s1 += weights[j];
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                s2 += weights[j];
+            }
+        }
+        ans = min(ans, <span class="hljs-built_in">abs</span>(s1 - s2));
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 3/12/2023</p>
