@@ -1,0 +1,46 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="chessboard-and-queens">Chessboard and Queens</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/chessBoardAndQueens.cpp">GitHub link</a></p>
+<p>This is the 17th problem in the CSES competitive programming problem set.</p>
+<p>The problem goes like this: Your task is to place eight queens on a chessboard so that no two queens are attacking each other. As an additional challenge, each square is either free or reserved, and you can only place queens on the free squares. However, the reserved squares do not prevent queens from attacking each other. How many possible ways are there to place the queens?</p>
+<p>This problem was another pretty easy one, as due to time limits you can brute force all solutions using recursive backtracking. Here&#39;s the code for this problem: </p>
+<pre><code><span class="hljs-built_in">int</span> ans = <span class="hljs-number">0</span>;
+bool <span class="hljs-built_in">sum</span>[<span class="hljs-number">15</span>], dif[<span class="hljs-number">15</span>], <span class="hljs-built_in">column</span>[<span class="hljs-number">8</span>];
+string input[<span class="hljs-number">8</span>];
+
+void backtrack(<span class="hljs-built_in">int</span> <span class="hljs-built_in">n</span>)
+{
+    <span class="hljs-built_in">if</span> (<span class="hljs-built_in">n</span> == <span class="hljs-number">8</span>)
+    {
+        ans += <span class="hljs-number">1</span>;
+    }
+    else
+    {
+        for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++)
+        {
+            <span class="hljs-built_in">if</span> (input[<span class="hljs-built_in">n</span>][i] == '.' &amp;&amp; !<span class="hljs-built_in">column</span>[i] &amp;&amp; !<span class="hljs-built_in">sum</span>[i + <span class="hljs-built_in">n</span>] &amp;&amp; !dif[i - <span class="hljs-built_in">n</span> + <span class="hljs-number">7</span>])
+            {
+                <span class="hljs-built_in">column</span>[i] = <span class="hljs-built_in">sum</span>[i + <span class="hljs-built_in">n</span>] = dif[i - <span class="hljs-built_in">n</span> + <span class="hljs-number">7</span>] = <span class="hljs-built_in">true</span>;
+                backtrack(<span class="hljs-built_in">n</span> + <span class="hljs-number">1</span>);
+                <span class="hljs-built_in">column</span>[i] = <span class="hljs-built_in">sum</span>[i + <span class="hljs-built_in">n</span>] = dif[i - <span class="hljs-built_in">n</span> + <span class="hljs-number">7</span>] = <span class="hljs-built_in">false</span>;
+            }
+        }
+    }
+
+}
+
+<span class="hljs-built_in">int</span> main()
+{
+    cin.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++)
+    {
+        cin &gt;&gt; input[i];
+    }
+
+    backtrack(<span class="hljs-number">0</span>);
+
+    cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 3/14/2023</p>
