@@ -1,0 +1,47 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="back-and-forth">Back and Forth</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/USACO/backAndForth.cpp">GitHub link</a></p>
+<p>This is an old usaco bronze problem that I found through usaco.guide.</p>
+<p>This problem is rather long like all usaco problems, so <a href="http://www.usaco.org/index.php?page=viewproblem2&amp;cpid=857">here</a>&#39;s a link so you can read it.</p>
+<p>This problem isn&#39;t too bad once your break it down. In order to tell if a solution is unique, we can just insert it into a set. This means that we can use recursive backtracking to emulate every possible setup that could&#39;ve happened. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">find_permutations</span><span class="hljs-params">(<span class="hljs-keyword">int</span> day, <span class="hljs-keyword">int</span> a, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; newnums, <span class="hljs-keyword">int</span> b, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; newnums2)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (day == <span class="hljs-number">4</span>)
+    {
+        ans.insert(a);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-keyword">int</span>) newnums.size(); i++)
+    {
+        <span class="hljs-keyword">int</span> curr = newnums[i];
+
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; tempA = newnums;
+        tempA.erase(begin(tempA) + i);
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; tempB = newnums2;
+        tempB.push_back(curr);
+
+        find_permutations(day + <span class="hljs-number">1</span>, b + curr, tempB, a - curr, tempA);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+    freopen(<span class="hljs-string">"backforth.in"</span>, <span class="hljs-string">"r"</span>, <span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"backforth.out"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; nums1[i];
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; nums2[i];
+    }
+
+    find_permutations(<span class="hljs-number">0</span>, <span class="hljs-number">1000</span>, nums1, <span class="hljs-number">1000</span>, nums2);
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans.size() &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written on 3/19/2023</p>
