@@ -1,0 +1,103 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+
+<h1 id="twenty-four">Twenty Four</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/other/twentyFour.cpp">GitHub link</a></p>
+<p>This is an old DMOJ problem that I found through usaco.guide.</p>
+<p>This problem asks us to find the best solution to the card game <a href="https://www.pagat.com/adders/24.html">twenty four</a> given a hand of cards.</p>
+<p>This problem seems rather difficult at first, but it&#39;s actually not. We can brute force every operator using recursive backtracking, and to account for the order in which we do these operators, we can use next permutation to check every possible order of cards. I forgot the account for integer division when I solved this problem, so my code has a rather ugly method to check for that edge case. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; nums(<span class="hljs-number">4</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">checkEdgecaseIForgotAbout</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sign, <span class="hljs-keyword">int</span> num1, <span class="hljs-keyword">int</span> num2)</span>
+</span>{
+    <span class="hljs-keyword">switch</span> (sign)
+    {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> num1 - num2;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span> : 
+        {
+            <span class="hljs-keyword">if</span> (num2 == <span class="hljs-number">0</span> || num1 % num2)
+            {
+                <span class="hljs-keyword">return</span> <span class="hljs-number">-1e9</span>;
+            }
+            <span class="hljs-keyword">return</span> num1 / num2;
+        }
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span> :
+            <span class="hljs-keyword">return</span> num1 + num2;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span> :
+            <span class="hljs-keyword">return</span> num1 * num2;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">recur</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> a)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">3</span>)
+    {
+        <span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">24</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">return</span> a;
+        }
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">int</span> big = max({recur(i + <span class="hljs-number">1</span>, a * nums[i + <span class="hljs-number">1</span>]), recur(i + <span class="hljs-number">1</span>, a + nums[i + <span class="hljs-number">1</span>]), recur(i + <span class="hljs-number">1</span>, a - nums[i + <span class="hljs-number">1</span>])});
+
+        <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">4</span>; l++)
+            {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++)
+                {
+                    <span class="hljs-keyword">if</span> (checkEdgecaseIForgotAbout(l, a, checkEdgecaseIForgotAbout(j, nums[<span class="hljs-number">2</span>], nums[<span class="hljs-number">3</span>])) &gt; big &amp;&amp; checkEdgecaseIForgotAbout(l, a, checkEdgecaseIForgotAbout(j, nums[<span class="hljs-number">2</span>], nums[<span class="hljs-number">3</span>])) &lt;= <span class="hljs-number">24</span>)
+                    {
+                        big = checkEdgecaseIForgotAbout(l, a, checkEdgecaseIForgotAbout(j, nums[<span class="hljs-number">2</span>], nums[<span class="hljs-number">3</span>]));
+                    }
+                }
+            }       
+        }
+
+        <span class="hljs-keyword">if</span> (nums[i + <span class="hljs-number">1</span>] == <span class="hljs-number">0</span> || a % nums[i + <span class="hljs-number">1</span>] != <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">return</span> big;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">return</span> max(big, recur(i + <span class="hljs-number">1</span>, a / nums[i + <span class="hljs-number">1</span>]));
+        }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        ans = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++)
+        {
+            <span class="hljs-built_in">cin</span> &gt;&gt; nums[j];
+        }
+
+        sort(nums.begin(), nums.end());
+
+        <span class="hljs-keyword">do</span>
+        {
+            ans = max(ans, recur(<span class="hljs-number">0</span>, nums[<span class="hljs-number">0</span>]));
+        }
+        <span class="hljs-keyword">while</span> (next_permutation(nums.begin(), nums.end()));
+
+        <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+}
+</code></pre><p>Entry written on 3/20/2023</p>
