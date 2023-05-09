@@ -1,0 +1,55 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+
+<h1 id="distinct-numbers">Distinct Numbers</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/distinctNumberSort.cpp">GitHub link (sort)</a></p>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CSES/distinctNumbersSet.cpp">GitHub link (set)</a></p>
+<p>This is the 20th problem in the CSES competitive programming problem set.</p>
+<p>The problem goes like this: given a list of numbers, identify how many unique numbers there are. </p>
+<p>There are two basic ways to do this problem. First of all, you could add all the numbers to a set and print out it&#39;s size. Alternatively, you could instead sort the numbers and add one to your answer each time adjacent numbers are different values. Here&#39;s the code for both of these solutions:</p>
+<p>sort: </p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n, ans = <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; nums(n);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; nums[i];
+    }
+
+    sort(nums.begin(), nums.end());
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">if</span> (nums[i] != nums[i - <span class="hljs-number">1</span>])
+        {
+            ans += <span class="hljs-number">1</span>;
+        }
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>set:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; ans;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">int</span> a;
+        <span class="hljs-built_in">cin</span> &gt;&gt; a;
+        ans.insert(a);
+    }
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans.size() &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 5/8/2023</p>
