@@ -1,0 +1,48 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="kayaking">Kayaking</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/CodeForces/kayaking.cpp">GitHub link</a></p>
+<p>This is an old codeforces problem that I found through usaco.guide.</p>
+<p>The problem is rather long so <a href="https://codeforces.com/contest/863/problem/B">here</a>&#39;s a link so you can read it.</p>
+<p>This problem is pretty easy once you draw out all possible solutions for a test case. If we have no single kayaks, we just have to group people by how close they are in weight. This can be accomplished by sorting our list. However, we have 2 single kayaks. This is not that big of a deal, as we can just try out every possible combination of people in a single kayak to find the minimum weight. This will still run in time. Here&#39;s the code for this problem: </p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in">cin</span>.tie(<span class="hljs-number">0</span>)-&gt;sync_with_stdio(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-built_in">cin</span> &gt;&gt; n;
+
+    n *= <span class="hljs-number">2</span>;
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; people(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-built_in">cin</span> &gt;&gt; people[i];
+    }
+
+    sort(people.begin(), people.end());
+
+    <span class="hljs-keyword">int</span> ans = INT32_MAX;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; j++)
+        {
+            <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; people2;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l &lt; n; l++)
+            {
+                <span class="hljs-keyword">if</span> (l != i &amp;&amp; l != j)
+                {
+                    people2.push_back(people[l]);
+                }
+            }
+
+            <span class="hljs-keyword">int</span> curr = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>; l &lt; n - <span class="hljs-number">2</span>; l += <span class="hljs-number">2</span>)
+            {
+                curr += people2[l + <span class="hljs-number">1</span>] - people2[l];
+            }
+            ans = min(curr, ans);
+        }
+    }
+    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+</code></pre><p>Entry written 6/7/2023</p>
