@@ -1,0 +1,37 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="ultimate-power">Ultimate Power</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/UIL/westwoodInv23/Ultimate.java">GitHub link</a></p>
+<p>This was a problem from the 2023 Westwood UIL invitational.</p>
+<p>The problem goes like this: Given a correct string and a user inputted string, output by what percentage the user string matches with the correct string.</p>
+<p>This problem was very simple. All we had to do was split up the user input string and compare each portion of it to the correct string. We kept track of how many parts they got correct, and then divided that by the total number of prompts. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Ultimate {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span> args[]) throws IOException
+    {
+        Scanner test = <span class="hljs-keyword">new</span> Scanner(<span class="hljs-keyword">new</span> <span class="hljs-built_in">File</span>(<span class="hljs-string">"ultimate.dat"</span>));
+
+        <span class="hljs-keyword">int</span> n = test.nextInt();
+        test.nextLine();
+        <span class="hljs-keyword">String</span>[] buttons = {<span class="hljs-string">"LEFT"</span>, <span class="hljs-string">"LEFT"</span>, <span class="hljs-string">"A"</span>, <span class="hljs-string">"RIGHT"</span>, <span class="hljs-string">"LEFT"</span>, <span class="hljs-string">"RIGHT"</span>, <span class="hljs-string">"DOWN"</span>, <span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"RIGHT"</span>, <span class="hljs-string">"UP"</span>};
+
+        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        {
+            Scanner <span class="hljs-built_in">line</span> = <span class="hljs-keyword">new</span> Scanner(test.nextLine());
+            <span class="hljs-keyword">String</span>[] inputs = <span class="hljs-built_in">line</span>.nextLine().split(<span class="hljs-string">" "</span>);
+            <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>, correct = <span class="hljs-number">0</span>;
+            <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; inputs.length; j++)
+            {
+                count += <span class="hljs-number">1</span>;
+                <span class="hljs-built_in">if</span> (j &lt;= <span class="hljs-number">10</span> &amp;&amp; inputs[j].equals(buttons[j]))
+                {
+                    correct += <span class="hljs-number">1</span>;
+                }
+            }
+            count = Math.<span class="hljs-built_in">max</span>(count, <span class="hljs-number">11</span>);
+            <span class="hljs-keyword">double</span> answer = ((<span class="hljs-keyword">double</span>)(correct) / count) * <span class="hljs-number">100</span>;
+            System.out.<span class="hljs-built_in">println</span>(<span class="hljs-keyword">String</span>.format(<span class="hljs-string">"%.2f"</span>, answer) + <span class="hljs-string">"%"</span>);
+        }
+
+    }
+}
+</code></pre><p>Entry written 6/11/2023</p>
