@@ -1,0 +1,25 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="carpe-diem">Carpe Diem</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/UIL/westwoodInv23/Diem.java">GitHub link</a></p>
+<p>This was a problem from the 2023 Westwood UIL invitational.</p>
+<p>The problem goes like this: Given two numbers, output the sum.</p>
+<p>The problem was as easy as it sounds. Here&#39;s the code:</p>
+<pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Diem {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span> args[]) throws IOException
+    {
+        Scanner test = <span class="hljs-keyword">new</span> Scanner(<span class="hljs-keyword">new</span> <span class="hljs-built_in">File</span>(<span class="hljs-string">"diem.dat"</span>));
+
+        <span class="hljs-keyword">int</span> n = test.nextInt();
+
+        <span class="hljs-built_in">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        {
+            <span class="hljs-keyword">int</span> a = test.nextInt(), b =  test.nextInt();
+
+            System.out.<span class="hljs-built_in">println</span>(a + b);
+        }
+
+
+    }
+}
+</code></pre><p>Entry written 6/12/2023</p>
