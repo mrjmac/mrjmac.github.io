@@ -1,0 +1,134 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+
+<h1 id="three-part-harmony">Three Part Harmony</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/UIL/westwoodInv23/Hook.java">GitHub link</a></p>
+<p>This was a problem from the 2023 Westwood UIL invitational.</p>
+<p>The problem goes like this: <img src="https://cdn.discordapp.com/attachments/693669548187975770/1116735455942168576/image.png" alt=""></p>
+<p>This problem was very easy but incredibly tedious and annoying to code. There was probably a quicker way to do it, but it was the last problem we did so we weren&#39;t very concerned with time. Here&#39;s the code for this problem:</p>
+<pre><code>public <span class="hljs-built_in">class</span> Three {
+    public static void main(String args[]) throws IOException
+    {
+        Scanner test = new Scanner(new File(<span class="hljs-string">"three.dat"</span>));
+
+        int n = test.nextInt();
+        test.nextLine();
+
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        {
+
+
+
+            int <span class="hljs-keyword">first</span> = note(test.next());
+            int <span class="hljs-keyword">second</span> = note(test.next());
+            int <span class="hljs-keyword">third</span> = note(test.next());
+
+
+
+
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">first</span> &gt; <span class="hljs-keyword">second</span>)
+            {
+                <span class="hljs-keyword">second</span> += <span class="hljs-number">12</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">second</span> &gt; <span class="hljs-keyword">third</span>)
+            {
+                <span class="hljs-keyword">third</span> += <span class="hljs-number">12</span>;
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">second</span> &gt; <span class="hljs-keyword">third</span>)
+                {
+                    <span class="hljs-keyword">third</span> += <span class="hljs-number">12</span>;
+                }
+            }
+
+
+
+            int distance1 = <span class="hljs-keyword">third</span> - <span class="hljs-keyword">second</span>;
+            int distance2 = <span class="hljs-keyword">second</span> - <span class="hljs-keyword">first</span>;
+
+            int distance3 = <span class="hljs-keyword">third</span> - <span class="hljs-keyword">first</span>;
+            distance3 = distance3 % <span class="hljs-number">12</span>;
+
+
+            <span class="hljs-keyword">if</span> (distance1 == distance2 &amp;&amp; distance1== <span class="hljs-number">0</span>){
+                System.out.println(<span class="hljs-string">"Girls do what we like"</span>);
+            }
+
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (distance1 == <span class="hljs-number">0</span> || distance1 == <span class="hljs-number">3</span> || distance1 == <span class="hljs-number">4</span> || distance1 == <span class="hljs-number">5</span> || distance1 == <span class="hljs-number">7</span> || distance1 == <span class="hljs-number">8</span> || distance1 == <span class="hljs-number">9</span>)
+            {
+                <span class="hljs-keyword">if</span> (distance2 == <span class="hljs-number">0</span> || distance2 == <span class="hljs-number">3</span> || distance2 == <span class="hljs-number">4</span> || distance2 == <span class="hljs-number">5</span> || distance2 == <span class="hljs-number">7</span> || distance2 == <span class="hljs-number">8</span> || distance2 == <span class="hljs-number">9</span>)
+                {
+                    <span class="hljs-keyword">if</span> (distance3 == <span class="hljs-number">0</span> || distance3 == <span class="hljs-number">3</span> || distance3 == <span class="hljs-number">4</span> || distance3 == <span class="hljs-number">5</span> || distance3 == <span class="hljs-number">7</span> || distance3 == <span class="hljs-number">8</span> || distance3 == <span class="hljs-number">9</span>)
+                    {
+                        System.out.println(<span class="hljs-string">"Girls do what we like"</span>);
+
+                    }
+                    <span class="hljs-keyword">else</span>{
+                        System.out.println(<span class="hljs-string">"AHHHHHHH"</span>);
+                    }
+
+                }
+                <span class="hljs-keyword">else</span>{
+                    System.out.println(<span class="hljs-string">"AHHHHHHH"</span>);
+                }
+            }
+            <span class="hljs-keyword">else</span> 
+                System.out.println(<span class="hljs-string">"AHHHHHHH"</span>);
+
+
+        }
+
+
+    }
+
+    public static int note(String n)
+    {
+        <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"A"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"A#"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Bb"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">2</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"B"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Cb"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">3</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"C"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"B#"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">4</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"C#"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Db"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">5</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"D"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">6</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"D#"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Eb"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">7</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"E"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Fb"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">8</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"F"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"E#"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">9</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"F#"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Gb"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">10</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"G"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">11</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"G#"</span>) || n.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"Ab"</span>))
+        {
+<span class="hljs-built_in">            return</span> <span class="hljs-number">12</span>;
+        }
+<span class="hljs-built_in">        return</span> <span class="hljs-number">0</span>;
+    }
+}
+</code></pre><p>Entry written 6/14/2023</p>
