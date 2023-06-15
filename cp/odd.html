@@ -1,0 +1,22 @@
+<style type="text/css">body{line-height:1.6;font-size:18px;color:#444;}h1,h2,h3{line-height:1.2}code{line-height:normal;font-size:13px;color:normal}</style>
+<h1 id="oddpocalypse">Oddpocalypse</h1>
+<p><a href="https://github.com/mrjmac/competitive-programming/blob/main/UIL/westwoodInv23/Oddpocalypse.java">GitHub link</a></p>
+<p>This was a problem from the 2023 Westwood UIL invitational.</p>
+<p>The problem goes like this: Given a list of numbers of unknown length, output only odd integers.</p>
+<p>This problem is as easy as it looks. Here&#39;s the code for this problem:</p>
+<pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Oddpocalypse {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span> args[]) throws IOException
+    {
+        Scanner test = <span class="hljs-keyword">new</span> Scanner(<span class="hljs-keyword">new</span> <span class="hljs-built_in">File</span>(<span class="hljs-string">"oddpocalypse.dat"</span>));
+
+        <span class="hljs-built_in">while</span> (test.hasNext())
+        {
+            <span class="hljs-keyword">int</span> curr = test.nextInt();
+            <span class="hljs-built_in">if</span> (curr % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>)
+            {
+                System.out.<span class="hljs-built_in">println</span>(curr);
+            }
+        }
+    }
+}
+</code></pre><p>Entry written 6/15/2023</p>
