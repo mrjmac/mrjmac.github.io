@@ -7,7 +7,6 @@
 <li>This sort loops through an array filled with numbers starting at Array[i].</li>
 <li>If Array[i] is less than Array[i - 1], Array[i] is removed from the Array.</li>
 <li>This is considered a lossy sort, like how JPEG compression is considered a method of lossy compression.</li>
-<li>The world would be a better place if more government agencies and financial institutions used this to sort their databases.</li>
 <li>The main code loop: </li>
 <li><pre><code><span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;
 <span class="hljs-built_in">while</span> (i &lt; numbers.<span class="hljs-built_in">size</span>())
@@ -38,7 +37,7 @@
 </ul>
 <h2 id="-selectionsort-https-github-com-mrjmac-sorts-blob-main-selectionsort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/selectionsort.java">selectionsort</a></h2>
 <ul>
-<li>Pretty simple sort but not really ever applicable in every day code.</li>
+<li>Pretty simple sort but not really ever applicable in everyday code.</li>
 <li>Repeatedly goes through the unsorted section of the array and finds the smallest element.</li>
 <li>Once the smallest element is found, it&#39;s moved to the beginning of the array.</li>
 <li>Probably the most intuitive sort.</li>
@@ -105,7 +104,6 @@
 <h2 id="-mergesort-https-github-com-mrjmac-sorts-blob-main-mergesort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/mergesort.java">mergesort</a></h2>
 <ul>
 <li>While it can be done without recursion, this is much more simple to implement recursively.</li>
-<li>Can be hard to grasp at first, but pretty simple once you think about it a bit.</li>
 <li>Splits the array into two evenly sized arrays repeatedly until the size of the size of the array is one. Once it is, we begin to merge the arrays together. The code for that can be seen here:</li>
 <li><pre><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ArrayList&lt;Integer&gt; recursiveMergesort(ArrayList&lt;Integer&gt; a)
 {
@@ -174,7 +172,6 @@
 </ul>
 <h2 id="-countingsort-https-github-com-mrjmac-sorts-blob-main-countingsort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/countingsort.java">countingsort</a></h2>
 <ul>
-<li>A very mindblowing sort the first time you see it. However, it is extremely intuitive and ingenious.</li>
 <li>Sorts numbers out of place, so two arrays are needed.</li>
 <li>First, you count the number of times that each unique number in the array appears. In order to be able to do this, you have to know the maximum value in the array. The code for this can be seen here:</li>
 <li><pre><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-keyword">sort</span>.length - <span class="hljs-number">1</span>; i++)
@@ -183,8 +180,6 @@
 }
 </code></pre></li>
 <li>Next, you find the prefix sum of the array from the previous step.</li>
-<li>If you think about it, this makes complete sense as the count of each unique number represents how many spaces they fill. In order for a two to fit in the array, it must consider how many spaces the ones take up.</li>
-<li>The code for this process can be seen here:</li>
 <li><pre><code>for (int <span class="hljs-keyword">j </span>= <span class="hljs-number">1</span><span class="hljs-comment">; j &lt;= max; j++)</span>
 {
     <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j] </span>+= <span class="hljs-built_in">count</span>[<span class="hljs-keyword">j </span>- <span class="hljs-number">1</span>]<span class="hljs-comment">;</span>
@@ -243,7 +238,6 @@
 </ul>
 <h2 id="-radixsort-https-github-com-mrjmac-sorts-blob-main-radixsort-java-"><a href="https://github.com/mrjmac/sorts/blob/main/radixsort.java">radixsort</a></h2>
 <ul>
-<li>This was invented by an incredibly intelligent man.</li>
 <li>In order to save time on larger numbers compared to counting sort, runs a counting sort on each individual digit of every number. The code for a counting sort can be found <a href="https://github.com/mrjmac/sorts/blob/main/countingsort.java">here</a>.</li>
 <li>Here&#39;s the code for this sort:</li>
 <li>
@@ -257,7 +251,7 @@
 
 }
 </code></pre></li>
-<li>The time complexity of this sort is O(d(n+k)) where K is the greatest number in the digits spot and d is the number of digits. I&#39;m not certain about this, but I&#39;m pretty sure.</li>
+<li>The time complexity of this sort is O(d(n+k)) where K is the greatest number in the digits spot and d is the number of digits.</li>
 </ul>
 <h2 id="-bogosort-https-github-com-mrjmac-sorts-blob-main-bogosort-cpp-"><a href="https://github.com/mrjmac/sorts/blob/main/bogosort.cpp">bogosort</a></h2>
 <ul>
